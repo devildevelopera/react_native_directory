@@ -28,7 +28,7 @@ const TabNavigator = createMaterialTopTabNavigator(
   },{
     tabBarOptions: {
       style: {
-        paddingTop: Platform.OS === "ios" && isX ? 40 : 'inherit',
+        paddingTop: Platform.OS === "ios" && isX ? 40 : 0,
       }
     }
   });
