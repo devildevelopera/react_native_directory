@@ -58,7 +58,8 @@ export default styles = StyleSheet.create({
 
     SearchBox: {
         fontSize: 16,
-        textAlign: 'center'
+        textAlign: 'center',
+        height: 40
     },
 
     mapView: {
