@@ -1,8 +1,39 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Alert, TouchableOpacity, ActivityIndicator } from 'react-native';
+import MultiSelect from 'react-native-multiple-select';
+import { View, Text, TextInput, Alert, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
 
 import styles from '../styles/Styles';
 import baseUrl from '../constants/api';
+
+const items = [{
+    id: '92iijs7yta',
+    name: 'Ondo'
+}, {
+    id: 'a0s0a8ssbsd',
+    name: 'Ogun'
+}, {
+    id: '16hbajsabsd',
+    name: 'Calabar'
+}, {
+    id: 'nahs75a5sg',
+    name: 'Lagos'
+}, {
+    id: '667atsas',
+    name: 'Maiduguri'
+}, {
+    id: 'hsyasajs',
+    name: 'Anambra'
+}, {
+    id: 'djsjudksjd',
+    name: 'Benue'
+}, {
+    id: 'sdhyaysdj',
+    name: 'Kaduna'
+}, {
+    id: 'suudydjsjd',
+    name: 'Abuja'
+}
+];
 
 class AddEntryPage extends Component {
     constructor(props) {
@@ -13,6 +44,7 @@ class AddEntryPage extends Component {
             department: '',
             firstName: '',
             lastname: '',
+            selectedItems: [],
             errorMessage: '',
             isFormValid: true,
             apiResult: '',
@@ -99,6 +131,10 @@ class AddEntryPage extends Component {
         }
     }
 
+    onSelectedItemsChange = selectedItems => {
+        this.setState({ selectedItems });
+    };
+
     renderError = () => {
         if (!this.state.isFormValid) {
             return <Text style={{
@@ -133,7 +169,7 @@ class AddEntryPage extends Component {
         }
 
         return (
-            <View style={styles.FormContainer}>
+            <ScrollView style={styles.FormContainer}>
                 <Text style={{ fontSize: 20, marginRight: 25, textAlign: 'center', marginBottom: 7 }}>
                 </Text>
 
@@ -196,6 +232,29 @@ class AddEntryPage extends Component {
                     }}
                     value={this.state.lastname != 0 ? this.state.lastname.toString() : ''} />
 
+                <View
+                    style={{ width: '90%' }}
+                >
+                    <MultiSelect
+                        hideTags
+                        items={items}
+                        uniqueKey="id"
+                        ref={(component) => { this.multiSelect = component }}
+                        onSelectedItemsChange={this.onSelectedItemsChange}
+                        selectedItems={this.state.selectedItems}
+                        selectText="Pick Categories"
+                        searchInputPlaceholderText="Search Category..."
+                        onChangeInput={(text) => console.log(text)}
+                        altFontFamily="ProximaNova-Light"
+                        displayKey="name"
+                        submitButtonColor="#00BCD4"
+                        submitButtonText="Complete"
+                    />
+                    <View>
+                        {this.multiSelect ? this.multiSelect.getSelectedItemsExt(this.state.selectedItems) : null}
+                    </View>
+                </View>
+
                 {this.renderError()}
 
                 <TouchableOpacity
@@ -211,7 +270,7 @@ class AddEntryPage extends Component {
                     onPress={this.ClearState}>
                     <Text style={styles.TextStyle}> Clear </Text>
                 </TouchableOpacity>
-            </View>
+            </ScrollView>
         );
     }
 }
