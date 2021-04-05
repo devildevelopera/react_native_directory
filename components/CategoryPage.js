@@ -82,7 +82,7 @@ class CategoryPage extends React.Component {
 
         return (
             <View style={{ flex: 1, paddingTop: 20 }}>
-                <ActivityIndicator />
+                <ActivityIndicator size="large" color="#0000ff" />
             </View>
         );
     };
