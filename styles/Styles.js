@@ -4,7 +4,6 @@ export default styles = StyleSheet.create({
 
     TextInputStyleClass: {
         textAlign: 'center',
-        width: '90%',
         marginBottom: 7,
         height: 40,
         borderWidth: 1,
@@ -17,7 +16,6 @@ export default styles = StyleSheet.create({
         paddingBottom: 10,
         borderRadius: 5,
         marginBottom: 7,
-        width: '90%',
         backgroundColor: '#00BCD4'
     },
 
@@ -28,7 +26,7 @@ export default styles = StyleSheet.create({
 
     RowTitleContainer: {
         fontSize: 20,
-        color: 'red',
+        color: '#FF5722',
         paddingRight: 10,
         paddingTop: 10,
         paddingLeft: 10
@@ -47,7 +45,7 @@ export default styles = StyleSheet.create({
         paddingTop: (Platform.OS == 'ios') ? 20 : 0,
         marginLeft: 5,
         marginRight: 5,
-        paddingLeft: 35,
+        paddingHorizontal: 35,
         backgroundColor: '#fff'
     },
 
@@ -73,6 +71,13 @@ export default styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0
+    },
+
+    multiSelectView: {
+        borderWidth: 1,
+        borderColor: '#FF5722',
+        borderRadius: 5,
+        marginBottom: 7,
     }
 
 });

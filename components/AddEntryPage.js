@@ -1,45 +1,44 @@
 import React, { Component } from 'react';
-import MultiSelect from 'react-native-multiple-select';
+import SectionedMultiSelect from 'react-native-sectioned-multi-select';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { View, Text, TextInput, Alert, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
 
 import styles from '../styles/Styles';
 import baseUrl from '../constants/api';
 
-const items = [{
-    id: '92iijs7yta',
-    name: 'Ondo'
-}, {
-    id: 'a0s0a8ssbsd',
-    name: 'Ogun'
-}, {
-    id: '16hbajsabsd',
-    name: 'Calabar'
-}, {
-    id: 'nahs75a5sg',
-    name: 'Lagos'
-}, {
-    id: '667atsas',
-    name: 'Maiduguri'
-}, {
-    id: 'hsyasajs',
-    name: 'Anambra'
-}, {
-    id: 'djsjudksjd',
-    name: 'Benue'
-}, {
-    id: 'sdhyaysdj',
-    name: 'Kaduna'
-}, {
-    id: 'suudydjsjd',
-    name: 'Abuja'
-}
-];
+const items = [
+    {
+        name: 'Apple',
+        id: 10,
+    },
+    {
+        name: 'Strawberry',
+        id: 17,
+    },
+    {
+        name: 'Pineapple',
+        id: 13,
+    },
+    {
+        name: 'Banana',
+        id: 14,
+    },
+    {
+        name: 'Watermelon',
+        id: 15,
+    },
+    {
+        name: 'Kiwi fruit',
+        id: 16,
+    }
+]
 
 class AddEntryPage extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            categories: [],
             organizationName: '',
             department: '',
             firstName: '',
@@ -131,7 +130,33 @@ class AddEntryPage extends Component {
         }
     }
 
-    onSelectedItemsChange = selectedItems => {
+    componentDidMount() {
+        this.LoadCategories();
+    }
+
+    LoadCategories = () => {
+        let url = baseUrl + '/category'
+        return fetch(url)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                if (responseJson.length > 0) {
+                    this.setState({
+                        loading: false,
+                        categories: [...this.state.categories, ...responseJson],
+                    });
+                } else {
+                    this.setState({
+                        loading: false,
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+    }
+
+    onSelectedItemsChange = (selectedItems) => {
         this.setState({ selectedItems });
     };
 
@@ -230,29 +255,19 @@ class AddEntryPage extends Component {
                     onSubmitEditing={(event) => {
                         this.AddEntry();
                     }}
-                    value={this.state.lastname != 0 ? this.state.lastname.toString() : ''} />
+                    value={this.state.lastname != 0 ? this.state.lastname.toString() : ''}
+                />
 
-                <View
-                    style={{ width: '90%' }}
-                >
-                    <MultiSelect
-                        hideTags
-                        items={items}
+                <View style={styles.multiSelectView}>
+                    <SectionedMultiSelect
+                        items={this.state.categories}
+                        IconRenderer={Icon}
                         uniqueKey="id"
-                        ref={(component) => { this.multiSelect = component }}
+                        displayKey="name"
+                        selectText="Choose category..."
                         onSelectedItemsChange={this.onSelectedItemsChange}
                         selectedItems={this.state.selectedItems}
-                        selectText="Pick Categories"
-                        searchInputPlaceholderText="Search Category..."
-                        onChangeInput={(text) => console.log(text)}
-                        altFontFamily="ProximaNova-Light"
-                        displayKey="name"
-                        submitButtonColor="#00BCD4"
-                        submitButtonText="Complete"
                     />
-                    <View>
-                        {this.multiSelect ? this.multiSelect.getSelectedItemsExt(this.state.selectedItems) : null}
-                    </View>
                 </View>
 
                 {this.renderError()}
