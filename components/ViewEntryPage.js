@@ -1,5 +1,6 @@
+import MapView, { Marker } from 'react-native-maps';
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicator, Image, Dimensions } from 'react-native';
+import { View, Text, ActivityIndicator, Image, Dimensions, ScrollView } from 'react-native';
 
 import styles from '../styles/Styles';
 import baseUrl from '../constants/api';
@@ -46,17 +47,6 @@ class ViewEntryPage extends Component {
 
     }
 
-    renderSeparator = () => {
-        return (
-            <View
-                style={{
-                    height: 1,
-                    backgroundColor: "#CED0CE"
-                }}
-            />
-        );
-    }
-
     getPhoneTitle = (type) => {
         let title = ''
         switch (type) {
@@ -97,12 +87,11 @@ class ViewEntryPage extends Component {
         }
 
         return (
-            <View style={[styles.BaseView]}>
-                {this.renderSeparator()}
+            <ScrollView style={[styles.BaseView]}>
                 <View>
                     <Image
                         source={{ uri: entry.images.photo.large.url }}
-                        style={{ height: imageHeight, width: imageWidth }}
+                        style={{ height: imageHeight, width: imageWidth, marginBottom: 10 }}
                     />
                     <Text
                         style={styles.RowTitleContainer}
@@ -144,9 +133,27 @@ class ViewEntryPage extends Component {
                             {this.getPhoneTitle(item.type)}: {item.number.rendered}
                         </Text>
                     ))}
-
+                    <View
+                        style={styles.mapView}
+                    >
+                        <MapView
+                            style={styles.map}
+                            initialRegion={{
+                            latitude: 37.78825,
+                            longitude: -122.4324,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                            }}
+                        >
+                            <Marker coordinate={{
+                                latitude: 37.78825,
+                                longitude: -122.4324
+                                }}
+                            />
+                        </MapView>
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }
