@@ -14,7 +14,7 @@ class ViewEntryPage extends Component {
 
         this.state = {
             entryId: 0,
-            item: undefined,
+            entry: undefined,
             isLoading: true
         }
     }
@@ -37,7 +37,7 @@ class ViewEntryPage extends Component {
             .then((responseJson) => {
                 this.setState({
                     isLoading: false,
-                    item: responseJson,
+                    entry: responseJson,
                 });
             })
             .catch((error) => {
@@ -46,7 +46,48 @@ class ViewEntryPage extends Component {
 
     }
 
+    renderSeparator = () => {
+        return (
+            <View
+                style={{
+                    height: 1,
+                    backgroundColor: "#CED0CE"
+                }}
+            />
+        );
+    }
+
+    getPhoneTitle = (type) => {
+        let title = ''
+        switch (type) {
+            case 'homephone':
+                title = 'Home Phone';
+                break;
+            case 'home fax':
+                title = 'Home Fax';
+                break;
+            case 'cellphone':
+                title = 'Cell Phone';
+                break;
+            case 'workphone':
+                title = 'Work Phone';
+                break;
+            case 'workfax':
+                title = 'Work Fax';
+                break;
+        }
+
+        return title;
+    }
+
+    getAddressTitle = (type) => {
+        const title = type.charAt(0).toUpperCase() + type.slice(1);
+
+        return title;
+    }
+
     render() {
+        const { entry } = this.state;
         if (this.state.isLoading) {
             return (
                 <View style={{ flex: 1, paddingTop: 20 }}>
@@ -57,32 +98,53 @@ class ViewEntryPage extends Component {
 
         return (
             <View style={[styles.BaseView]}>
-                <View
-                    style={{
-                        height: 1,
-                        backgroundColor: "#CED0CE"
-                    }}
-                />
+                {this.renderSeparator()}
                 <View>
                     <Image
-                        source={{ uri: this.state.item.images.photo.large.url }}
+                        source={{ uri: entry.images.photo.large.url }}
                         style={{ height: imageHeight, width: imageWidth }}
                     />
                     <Text
-                        style={styles.RowContainer}
+                        style={styles.RowTitleContainer}
                     >
-                        {this.state.item.fn.rendered}
+                        Organization
                     </Text>
                     <Text
                         style={styles.RowContainer}
                     >
-                        {this.state.item.adr[0].street_address.rendered}
+                        {entry.fn.rendered}
                     </Text>
-                    <Text
-                        style={styles.RowContainer}
-                    >
-                        {this.state.item.adr[0].county.rendered} {this.state.item.adr[0].locality.rendered} {this.state.item.adr[0].region.rendered} {this.state.item.adr[0].postal_code.rendered}
+                    {entry.adr.length > 0 &&
+                        <Text
+                            style={styles.RowTitleContainer}
+                        >
+                            Address
                     </Text>
+                    }
+                    {entry.adr.map((item, index) => (
+                        <Text
+                            style={styles.RowContainer}
+                            key={index}
+                        >
+                            {this.getAddressTitle(item.type)}: {item.street_address.rendered}, {item.county.rendered} {item.locality.rendered} {item.region.rendered} {item.postal_code.rendered}
+                        </Text>
+                    ))}
+                    {entry.tel.length > 0 &&
+                        <Text
+                            style={styles.RowTitleContainer}
+                        >
+                            Phone
+                    </Text>
+                    }
+                    {entry.tel.map((item, index) => (
+                        <Text
+                            style={styles.RowContainer}
+                            key={index}
+                        >
+                            {this.getPhoneTitle(item.type)}: {item.number.rendered}
+                        </Text>
+                    ))}
+
                 </View>
             </View>
         );

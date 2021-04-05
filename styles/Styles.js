@@ -26,6 +26,14 @@ export default styles = StyleSheet.create({
         textAlign: 'center',
     },
 
+    RowTitleContainer: {
+        fontSize: 20,
+        color: 'red',
+        paddingRight: 10,
+        paddingTop: 10,
+        paddingLeft: 10
+    },
+
     RowContainer: {
         fontSize: 20,
         paddingRight: 10,
