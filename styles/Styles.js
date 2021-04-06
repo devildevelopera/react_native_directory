@@ -78,6 +78,33 @@ export default styles = StyleSheet.create({
         borderColor: '#FF5722',
         borderRadius: 5,
         marginBottom: 7,
-    }
+    },
+
+    BusinessHoursSectionStyle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 10,
+    },
+
+    font16: {
+        fontSize: 16,
+    },
+
+    ml10: {
+        marginLeft: 10
+    },
+
+    mr10: {
+        marginRight: 10
+    },
+
+    width50: {
+        width: '50%'
+    },
+
+    timeRangeStyle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
 
 });

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import SectionedMultiSelect from 'react-native-sectioned-multi-select';
+import RNPickerSelect from 'react-native-picker-select';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { View, Text, TextInput, Alert, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
+import SectionedMultiSelect from 'react-native-sectioned-multi-select';
+import { View, Text, TextInput, Alert, TouchableOpacity, ActivityIndicator, ScrollView, Keyboard, Input } from 'react-native';
 
 import styles from '../styles/Styles';
 import baseUrl from '../constants/api';
@@ -17,6 +20,8 @@ class AddEntryPage extends Component {
             firstName: '',
             lastname: '',
             selectedItems: [],
+            contacts: [],
+            date: new Date(),
             errorMessage: '',
             isFormValid: true,
             apiResult: '',
@@ -147,17 +152,24 @@ class AddEntryPage extends Component {
 
     ClearState = () => {
         this.setState({
+            categories: [],
             organizationName: '',
             department: '',
             firstName: '',
             lastname: '',
+            selectedItems: [],
+            contacts: [],
+            date: new Date(),
             errorMessage: '',
             isFormValid: true,
-            apiResult: ''
+            apiResult: '',
+            isLoading: false
         });
     }
 
+
     render() {
+
         if (this.state.isLoading) {
             return (
                 <View style={{ flex: 1, paddingTop: 20 }}>
@@ -243,7 +255,159 @@ class AddEntryPage extends Component {
                     />
                 </View>
 
-                {this.renderError()}
+                <View style={styles.BusinessHoursSectionStyle}>
+                    <Text style={styles.font16, styles.mr10}>
+                        Business Hours
+                    </Text>
+                    <FontAwesomeIcons
+                        name="plus-circle"
+                        size={20}
+                        color="#00BCD4"
+                        onPress={() => {
+                            let contacts = JSON.parse(JSON.stringify(this.state.contacts));
+                            contacts.push({
+                                'Monday': {},
+                                'Tuesday': {},
+                                'Wednesday': {},
+                                'Thursday': {},
+                                'Friday': {},
+                                'Saturday': {},
+                                'Sunday': {},
+                                "start_time": 'Date',
+                                "end_time": 'Date',
+                                "start_picker_show": false,
+                                "end_picker_show": false,
+                            });
+                            this.setState({
+                                contacts: contacts
+                            })
+                        }}
+                    />
+                </View>
+
+                {this.state.contacts.map((item, index) => (
+                    <View key={index} >
+                        <View style={styles.timeRangeStyle}>
+                            <View style={{ flex: 1 }}>
+                                <RNPickerSelect
+                                    items={[
+                                        { label: 'Monday', value: 'Monday' },
+                                        { label: 'Tuesday', value: 'Tuesday' },
+                                        { label: 'Wednesday', value: 'Wednesday' },
+                                        { label: 'Thursday', value: 'Thursday' },
+                                        { label: 'Friday', value: 'Friday' },
+                                        { label: 'Saturday', value: 'Saturday' },
+                                        { label: 'Sunday', value: 'Sunday' },
+                                    ]}
+                                    placeholder={{ label: 'Date', value: '' }}
+                                    onValueChange={item1 => {
+                                        let contacts = [...this.state.contacts];
+                                        item.start_time = item1 + '_start';
+                                        item.end_time = item1 + '_end';
+                                        this.setState({
+                                            contacts: contacts
+                                        })
+                                    }}
+                                    style={{ inputAndroid: { color: '#333' } }}
+                                />
+                            </View>
+                            <FontAwesomeIcons
+                                style={styles.ml10}
+                                name="minus-circle"
+                                size={20}
+                                color="#FF5722"
+                                onPress={() => {
+                                    var contacts = JSON.parse(JSON.stringify(this.state.contacts));
+                                    contacts.splice(index, 1);
+                                    this.setState({
+                                        contacts: contacts
+                                    })
+                                }} />
+                        </View>
+
+                        {item.start_picker_show &&
+                            <DateTimePicker
+                                testID="dateTimePicker"
+                                value={this.state.date}
+                                mode="time"
+                                is24Hour={true}
+                                display="default"
+                                onChange={(event, selectedDate) => {
+                                    let contacts = [...this.state.contacts];
+                                    item[`${item.start_time.replace('_start', '')}`].start_date = selectedDate;
+                                    item.start_picker_show = false;
+
+                                    this.setState({
+                                        contacts: contacts
+                                    })
+                                }}
+                            />
+                        }
+
+                        {item.end_picker_show &&
+                            <DateTimePicker
+                                testID="dateTimePicker"
+                                value={this.state.date}
+                                mode="time"
+                                is24Hour={true}
+                                display="default"
+                                onChange={(event, selectedDate) => {
+                                    let contacts = [...this.state.contacts];
+
+                                    item[`${item.end_time.replace('_end', '')}`].end_date = selectedDate;
+                                    item.end_picker_show = false;
+
+                                    this.setState({
+                                        contacts: contacts
+                                    })
+                                }}
+                            />
+                        }
+                        <View style={styles.timeRangeStyle}>
+                            {item.start_time !== 'Date' &&
+                                <TouchableOpacity
+                                    style={styles.width50}
+                                    onPress={() => {
+                                        let contacts = [...this.state.contacts];
+                                        item.start_picker_show = true;
+                                        this.setState({
+                                            contacts: contacts
+                                        })
+                                    }}>
+                                    <TextInput
+                                        value={item[`${item.start_time.replace('_start', '')}`]?.start_date ? new Date(item[`${item.start_time.replace('_start', '')}`]?.start_date).getHours() + ':' + new Date(item[`${item.start_time.replace('_start', '')}`]?.start_date).getMinutes() : ''}
+                                        style={styles.TextInputStyleClass}
+                                        placeholder="Start Time"
+                                        placeholderTextColor="#a6b0bb"
+                                        editable={false}
+                                    />
+                                </TouchableOpacity>
+                            }
+                            {item.end_time !== 'Date' &&
+                                <TouchableOpacity
+                                    style={styles.width50}
+                                    onPress={() => {
+                                        let contacts = [...this.state.contacts];
+                                        item.end_picker_show = true;
+                                        this.setState({
+                                            contacts: contacts
+                                        })
+                                    }}>
+                                    <TextInput
+                                        value={item[`${item.end_time.replace('_end', '')}`]?.end_date ? new Date(item[`${item.end_time.replace('_end', '')}`]?.end_date).getHours() + ':' + new Date(item[`${item.end_time.replace('_end', '')}`]?.end_date).getMinutes() : ''}
+                                        style={styles.TextInputStyleClass}
+                                        placeholder="End Time"
+                                        placeholderTextColor="#a6b0bb"
+                                        editable={false}
+                                    />
+                                </TouchableOpacity>
+                            }
+                        </View>
+                    </View>
+                ))
+                }
+
+                { this.renderError()}
 
                 <TouchableOpacity
                     activeOpacity={.4}
@@ -258,7 +422,7 @@ class AddEntryPage extends Component {
                     onPress={this.ClearState}>
                     <Text style={styles.TextStyle}> Clear </Text>
                 </TouchableOpacity>
-            </ScrollView>
+            </ScrollView >
         );
     }
 }
