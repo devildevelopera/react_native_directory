@@ -152,7 +152,6 @@ class AddEntryPage extends Component {
 
     ClearState = () => {
         this.setState({
-            categories: [],
             organizationName: '',
             department: '',
             firstName: '',
