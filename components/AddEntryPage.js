@@ -1,37 +1,10 @@
 import React, { Component } from 'react';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { View, Text, TextInput, Alert, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
 
 import styles from '../styles/Styles';
 import baseUrl from '../constants/api';
-
-const items = [
-    {
-        name: 'Apple',
-        id: 10,
-    },
-    {
-        name: 'Strawberry',
-        id: 17,
-    },
-    {
-        name: 'Pineapple',
-        id: 13,
-    },
-    {
-        name: 'Banana',
-        id: 14,
-    },
-    {
-        name: 'Watermelon',
-        id: 15,
-    },
-    {
-        name: 'Kiwi fruit',
-        id: 16,
-    }
-]
 
 class AddEntryPage extends Component {
     constructor(props) {
@@ -261,7 +234,7 @@ class AddEntryPage extends Component {
                 <View style={styles.multiSelectView}>
                     <SectionedMultiSelect
                         items={this.state.categories}
-                        IconRenderer={Icon}
+                        IconRenderer={MaterialIcons}
                         uniqueKey="id"
                         displayKey="name"
                         selectText="Choose category..."

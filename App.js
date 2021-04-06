@@ -1,12 +1,15 @@
 import { Dimensions, Platform } from 'react-native'; 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 
 import AddEntryPage from './components/AddEntryPage';
 import CategoryPage from './components/CategoryPage';
 import ViewEntryPage from './components/ViewEntryPage';
 import ViewCategoryPage from './components/ViewCategoryPage';
+
+MaterialIcons.loadFont();
 
 const d = Dimensions.get("window");
 const isX = Platform.OS === "ios" && (d.height > 800 || d.width > 800) ? true : false;
