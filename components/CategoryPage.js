@@ -4,6 +4,20 @@ import { View, FlatList, ActivityIndicator, Text, TextInput, Image, Dimensions }
 import styles from '../styles/Styles';
 import baseUrl from '../constants/api';
 
+
+export const Images = {
+    'adult-education': require('../assets/adult-education.jpg'),
+    'childcare': require('../assets/childcare.jpg'),
+    'childrens-education': require('../assets/childrens-education.jpg'),
+    'community-involvement-social-support': require('../assets/community-involvement-social-support.jpg'),
+    'community-reentry-assistance': require('../assets/community-reentry-assistance.jpg'),
+    'employment': require('../assets/employment.jpg'),
+    'family-relations': require('../assets/family-relations.jpg'),
+    'food': require('../assets/food.jpg'),
+    'healthcare-coverage': require('../assets/healthcare-coverage.jpg'),
+    'housing': require('../assets/housing.jpg'),
+}
+
 const dimensions = Dimensions.get('window');
 const imageHeight = Math.round(dimensions.width * 9 / 16);
 const imageWidth = dimensions.width;
@@ -35,6 +49,9 @@ class CategoryPage extends React.Component {
             .then((response) => response.json())
             .then((responseJson) => {
                 if (responseJson.length > 0) {
+                    responseJson.map(item => {
+                        item.imageSrc = `../assets/${item.slug}.jpg`;
+                    })
                     const filteredJson = responseJson;
                     this.setState({
                         loading: false,
@@ -107,7 +124,7 @@ class CategoryPage extends React.Component {
                     renderItem={({ item }) => (
                         <View>
                             <Image
-                                source={require('./1.jpg')}
+                                source={Images[`${item.slug}`]}
                                 style={{ height: imageHeight, width: imageWidth }}
                             />
                             <Text
