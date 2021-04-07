@@ -4,7 +4,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
-import { View, Text, TextInput, Alert, TouchableOpacity, ActivityIndicator, ScrollView, Keyboard, Input } from 'react-native';
+import { View, Text, TextInput, Alert, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
 
 import styles from '../styles/Styles';
 import baseUrl from '../constants/api';

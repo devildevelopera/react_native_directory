@@ -1,13 +1,10 @@
 import MapView, { Marker } from 'react-native-maps';
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicator, Image, Dimensions, ScrollView } from 'react-native';
+import { View, Text, ActivityIndicator, Image, ScrollView } from 'react-native';
 
 import styles from '../styles/Styles';
 import baseUrl from '../constants/api';
-
-const dimensions = Dimensions.get('window');
-const imageHeight = Math.round(dimensions.width * 9 / 16);
-const imageWidth = dimensions.width;
+import { imageHeight, imageWidth } from '../helper/Dimension';
 
 class ViewEntryPage extends Component {
     constructor(props) {

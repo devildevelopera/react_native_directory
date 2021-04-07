@@ -1,12 +1,9 @@
 import React from 'react';
-import { View, FlatList, ActivityIndicator, Text, TextInput, Dimensions, Image } from 'react-native';
+import { View, FlatList, ActivityIndicator, Text, TextInput, Image } from 'react-native';
 
 import styles from '../styles/Styles';
 import baseUrl from '../constants/api';
-
-const dimensions = Dimensions.get('window');
-const imageHeight = Math.round(dimensions.width * 9 / 16);
-const imageWidth = dimensions.width;
+import { imageHeight, imageWidth } from '../helper/Dimension';
 
 class ViewCategoryPage extends React.Component {
     constructor(props) {

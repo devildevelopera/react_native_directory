@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, FlatList, ActivityIndicator, Text, TextInput, Image, Dimensions } from 'react-native';
+import { View, FlatList, ActivityIndicator, Text, TextInput, Image } from 'react-native';
 
 import styles from '../styles/Styles';
 import baseUrl from '../constants/api';
-
+import { imageHeight, imageWidth } from '../helper/Dimension';
 
 export const Images = {
     'adult-education': require('../assets/adult-education.jpg'),
@@ -17,11 +17,6 @@ export const Images = {
     'healthcare-coverage': require('../assets/healthcare-coverage.jpg'),
     'housing': require('../assets/housing.jpg'),
 }
-
-const dimensions = Dimensions.get('window');
-const imageHeight = Math.round(dimensions.width * 9 / 16);
-const imageWidth = dimensions.width;
-
 
 class CategoryPage extends React.Component {
     constructor(props) {
