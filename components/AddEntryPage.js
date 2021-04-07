@@ -22,6 +22,10 @@ class AddEntryPage extends Component {
             selectedItems: [],
             contacts: [],
             date: new Date(),
+            email: '',
+            phone: '',
+            website: '',
+            notes: '',
             errorMessage: '',
             isFormValid: true,
             apiResult: '',
@@ -53,6 +57,26 @@ class AddEntryPage extends Component {
             this.setState({
                 isFormValid: false,
                 errorMessage: 'The Last Name field is required'
+            });
+        } else if (this.state.email == null || this.state.email.length == 0) {
+            this.setState({
+                isFormValid: false,
+                errorMessage: 'The Email field is required'
+            });
+        } else if (this.state.phone == null || this.state.phone.length == 0) {
+            this.setState({
+                isFormValid: false,
+                errorMessage: 'The Phone field is required'
+            });
+        } else if (this.state.website == null || this.state.website.length == 0) {
+            this.setState({
+                isFormValid: false,
+                errorMessage: 'The Website field is required'
+            });
+        } else if (this.state.notes == null || this.state.notes.length == 0) {
+            this.setState({
+                isFormValid: false,
+                errorMessage: 'The Notes field is required'
             });
         } else {
             this.setState({
@@ -159,6 +183,10 @@ class AddEntryPage extends Component {
             selectedItems: [],
             contacts: [],
             date: new Date(),
+            email: '',
+            phone: '',
+            website: '',
+            notes: '',
             errorMessage: '',
             isFormValid: true,
             apiResult: '',
@@ -236,9 +264,6 @@ class AddEntryPage extends Component {
                             lastname: value
                         })
                     }
-                    onSubmitEditing={(event) => {
-                        this.AddEntry();
-                    }}
                     value={this.state.lastname != 0 ? this.state.lastname.toString() : ''}
                 />
 
@@ -405,6 +430,63 @@ class AddEntryPage extends Component {
                     </View>
                 ))
                 }
+
+                <TextInput
+                    ref='txtEmail'
+                    placeholder='Input Email'
+                    style={styles.TextInputStyleClass}
+                    underlineColorAndroid='transparent'
+                    onChangeText={
+                        value => this.setState({
+                            email: value
+                        })
+                    }
+                    onSubmitEditing={(event) => {
+                        this.refs.txtPhone.focus();
+                    }}
+                    value={this.state.email != 0 ? this.state.email.toString() : ''} />
+
+                <TextInput
+                    ref='txtPhone'
+                    placeholder='Input Phone'
+                    style={styles.TextInputStyleClass}
+                    underlineColorAndroid='transparent'
+                    onChangeText={
+                        value => this.setState({
+                            phone: value
+                        })
+                    }
+                    onSubmitEditing={(event) => {
+                        this.refs.txtWebsite.focus();
+                    }}
+                    value={this.state.phone != 0 ? this.state.phone.toString() : ''} />
+
+                <TextInput
+                    ref='txtWebsite'
+                    placeholder='Input Website'
+                    style={styles.TextInputStyleClass}
+                    underlineColorAndroid='transparent'
+                    onChangeText={
+                        value => this.setState({
+                            website: value
+                        })
+                    }
+                    onSubmitEditing={(event) => {
+                        this.refs.txtNotes.focus();
+                    }}
+                    value={this.state.website != 0 ? this.state.website.toString() : ''} />
+
+                <TextInput
+                    ref='txtNotes'
+                    placeholder='Input Notes'
+                    style={styles.TextInputStyleClass}
+                    underlineColorAndroid='transparent'
+                    onChangeText={
+                        value => this.setState({
+                            notes: value
+                        })
+                    }
+                    value={this.state.notes != 0 ? this.state.notes.toString() : ''} />
 
                 { this.renderError()}
 
