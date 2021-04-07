@@ -118,6 +118,21 @@ class ViewEntryPage extends Component {
                             {this.getAddressTitle(item.type)}: {item.street_address.rendered}, {item.county.rendered} {item.locality.rendered} {item.region.rendered} {item.postal_code.rendered}
                         </Text>
                     ))}
+                    {entry.email.length > 0 &&
+                        <Text
+                            style={styles.RowTitleContainer}
+                        >
+                            Email
+                    </Text>
+                    }
+                    {entry.email.map((item, index) => (
+                        <Text
+                            style={styles.RowContainer}
+                            key={index}
+                        >
+                            {this.getAddressTitle(item.type)}: {item.address.rendered}
+                        </Text>
+                    ))}
                     {entry.tel.length > 0 &&
                         <Text
                             style={styles.RowTitleContainer}
@@ -133,6 +148,16 @@ class ViewEntryPage extends Component {
                             {this.getPhoneTitle(item.type)}: {item.number.rendered}
                         </Text>
                     ))}
+                    <Text
+                        style={styles.RowTitleContainer}
+                    >
+                        Notes
+                    </Text>
+                    <Text
+                        style={styles.RowContainer}
+                    >
+                        This is test note, the content is not coming from API
+                    </Text>
                     {entry.adr.length > 0 && entry.adr[0].latitude && entry.adr[0].longitude &&
                         <View
                             style={styles.mapView}
