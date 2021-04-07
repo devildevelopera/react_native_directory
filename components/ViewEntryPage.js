@@ -133,25 +133,27 @@ class ViewEntryPage extends Component {
                             {this.getPhoneTitle(item.type)}: {item.number.rendered}
                         </Text>
                     ))}
-                    <View
-                        style={styles.mapView}
-                    >
-                        <MapView
-                            style={styles.map}
-                            initialRegion={{
-                                latitude: 37.78825,
-                                longitude: -122.4324,
-                                latitudeDelta: 0.0922,
-                                longitudeDelta: 0.0421,
-                            }}
+                    {entry.adr.length > 0 && entry.adr[0].latitude && entry.adr[0].longitude &&
+                        <View
+                            style={styles.mapView}
                         >
-                            <Marker coordinate={{
-                                latitude: 37.78825,
-                                longitude: -122.4324
-                            }}
-                            />
-                        </MapView>
-                    </View>
+                            <MapView
+                                style={styles.map}
+                                initialRegion={{
+                                    latitude: parseFloat(entry.adr[0].latitude),
+                                    longitude: parseFloat(entry.adr[0].longitude),
+                                    latitudeDelta: 0.0922,
+                                    longitudeDelta: 0.0421,
+                                }}
+                            >
+                                <Marker coordinate={{
+                                    latitude: parseFloat(entry.adr[0].latitude),
+                                    longitude: parseFloat(entry.adr[0].longitude)
+                                }}
+                                />
+                            </MapView>
+                        </View>
+                    }
                 </View>
             </ScrollView>
         );
