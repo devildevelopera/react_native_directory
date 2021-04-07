@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, FlatList, ActivityIndicator, Text, TextInput, Image } from 'react-native';
+import { View, FlatList, ActivityIndicator, Text, TextInput } from 'react-native';
 
 import styles from '../styles/Styles';
 import baseUrl from '../constants/api';
-import { imageHeight, imageWidth } from '../helper/Dimension';
 
 class ViewCategoryPage extends React.Component {
     constructor(props) {
@@ -109,10 +108,6 @@ class ViewCategoryPage extends React.Component {
                     data={this.state.filteredData}
                     renderItem={({ item }) => (
                         <View>
-                            <Image
-                                source={{ uri: item.images.photo.large.url }}
-                                style={{ height: imageHeight, width: imageWidth, marginBottom: 10 }}
-                            />
                             <Text
                                 style={styles.RowContainer}
                                 onPress={this.GetViewEntry.bind(
