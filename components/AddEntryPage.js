@@ -312,7 +312,7 @@ class AddEntryPage extends Component {
                 {this.state.contacts.map((item, index) => (
                     <View key={index} >
                         <View style={styles.timeRangeStyle}>
-                            <View style={{ flex: 1 }}>
+                            <View style={{ flex: 1, marginVertical: 10 }}>
                                 <RNPickerSelect
                                     items={[
                                         { label: 'Monday', value: 'Monday' },
