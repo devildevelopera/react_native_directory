@@ -66,15 +66,22 @@ class LandingScreen extends React.Component {
   }
 }
 
-const StackNavigation = createStackNavigator({
-  Landing: {
-    screen: LandingScreen
+const StackNavigation = createStackNavigator(
+  {
+    Landing: {
+      screen: LandingScreen
+    },
+    Home: {
+      screen: TabNavigator
+    },
   },
-  Home: {
-    screen: TabNavigator
-  },
-}, {
-  headerMode: 'none'
-});
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        height: 0
+      }
+    }
+  }
+);
 
 export default createAppContainer(StackNavigation);
