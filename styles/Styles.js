@@ -27,6 +27,18 @@ export default styles = StyleSheet.create({
         borderRadius: 5,
     },
 
+    NotesInputStyleClass: {
+        textAlign: 'center',
+        marginBottom: 7,
+        padding: 10,
+        height: 120,
+        textAlignVertical: 'top',
+        textAlign: 'left',
+        borderWidth: 1,
+        borderColor: '#FF5722',
+        borderRadius: 5,
+    },
+
     TouchableOpacityStyle: {
         padding: 10,
         borderRadius: 5,

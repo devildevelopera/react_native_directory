@@ -480,7 +480,8 @@ class AddEntryPage extends Component {
                 <TextInput
                     ref='txtNotes'
                     placeholder='Input Notes'
-                    style={styles.TextInputStyleClass}
+                    multiline={true}
+                    style={styles.NotesInputStyleClass}
                     underlineColorAndroid='transparent'
                     onChangeText={
                         value => this.setState({
