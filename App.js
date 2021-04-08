@@ -79,9 +79,9 @@ const StackNavigation = createStackNavigator(
     defaultNavigationOptions: {
       headerStyle: {
         height: 0
-      }
-    },
-    headerMode: 'none'
+      },
+      headerLeft: () => null
+    }
   }
 );
 
