@@ -98,12 +98,7 @@ class ViewCategoryPage extends React.Component {
                     value={this.state.keyword}
                     style={styles.SearchBox}
                 />
-                <View
-                    style={{
-                        height: 1,
-                        backgroundColor: "#CED0CE"
-                    }}
-                />
+                {this.renderSeparator()}
                 <FlatList
                     data={this.state.filteredData}
                     renderItem={({ item }) => (
