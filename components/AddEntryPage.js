@@ -35,6 +35,7 @@ class AddEntryPage extends Component {
 
     static navigationOptions = {
         title: 'Submit New Entry',
+        headerLeft: () => null,
     };
 
     AddEntry = () => {
@@ -207,7 +208,7 @@ class AddEntryPage extends Component {
 
         return (
             <ScrollView style={styles.FormContainer}>
-                <Text style={{ fontSize: 20, marginRight: 25, textAlign: 'center', marginBottom: 7 }}>
+                <Text style={{ marginBottom: 7 }}>
                 </Text>
 
                 <TextInput
@@ -503,6 +504,10 @@ class AddEntryPage extends Component {
                     onPress={this.ClearState}>
                     <Text style={styles.TextStyle}> Clear </Text>
                 </TouchableOpacity>
+
+                <Text style={{ marginTop: 7 }}>
+                </Text>
+
             </ScrollView >
         );
     }

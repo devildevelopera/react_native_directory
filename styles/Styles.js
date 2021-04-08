@@ -12,8 +12,7 @@ export default styles = StyleSheet.create({
     },
 
     TouchableOpacityStyle: {
-        paddingTop: 10,
-        paddingBottom: 10,
+        padding: 10,
         borderRadius: 5,
         marginBottom: 7,
         backgroundColor: '#00BCD4'

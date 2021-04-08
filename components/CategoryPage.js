@@ -32,6 +32,7 @@ class CategoryPage extends React.Component {
 
     static navigationOptions = {
         title: 'All Categories',
+        headerLeft: () => null,
     };
 
     componentDidMount() {
