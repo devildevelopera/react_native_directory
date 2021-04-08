@@ -261,7 +261,7 @@ Notes: ${this.state.notes}
                 </Text>
 
                 <TextInput
-                    placeholder='Input Organization Name'
+                    placeholder='Organization Name'
                     style={styles.TextInputStyleClass}
                     underlineColorAndroid='transparent'
                     onChangeText={
@@ -276,7 +276,7 @@ Notes: ${this.state.notes}
 
                 <TextInput
                     ref='txtDepartment'
-                    placeholder='Input Department Name'
+                    placeholder='Department Name'
                     style={styles.TextInputStyleClass}
                     underlineColorAndroid='transparent'
                     onChangeText={
@@ -291,7 +291,7 @@ Notes: ${this.state.notes}
 
                 <TextInput
                     ref='txtFirstName'
-                    placeholder='Input First Name'
+                    placeholder='First Name'
                     style={styles.TextInputStyleClass}
                     underlineColorAndroid='transparent'
                     onChangeText={
@@ -306,7 +306,7 @@ Notes: ${this.state.notes}
 
                 <TextInput
                     ref='txtLastName'
-                    placeholder='Input Last Name'
+                    placeholder='Last Name'
                     style={styles.TextInputStyleClass}
                     underlineColorAndroid='transparent'
                     onChangeText={
@@ -483,7 +483,7 @@ Notes: ${this.state.notes}
 
                 <TextInput
                     ref='txtEmail'
-                    placeholder='Input Email'
+                    placeholder='Email'
                     style={styles.TextInputStyleClass}
                     underlineColorAndroid='transparent'
                     onChangeText={
@@ -498,7 +498,7 @@ Notes: ${this.state.notes}
 
                 <TextInput
                     ref='txtPhone'
-                    placeholder='Input Phone'
+                    placeholder='Phone'
                     style={styles.TextInputStyleClass}
                     underlineColorAndroid='transparent'
                     onChangeText={
@@ -513,7 +513,7 @@ Notes: ${this.state.notes}
 
                 <TextInput
                     ref='txtWebsite'
-                    placeholder='Input Website'
+                    placeholder='Website'
                     style={styles.TextInputStyleClass}
                     underlineColorAndroid='transparent'
                     onChangeText={

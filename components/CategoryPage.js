@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, FlatList, ActivityIndicator, Text, TextInput, Image } from 'react-native';
+import { View, FlatList, ActivityIndicator, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styles/Styles';
 import baseUrl from '../constants/api';
@@ -118,21 +118,23 @@ class CategoryPage extends React.Component {
                 <FlatList
                     data={this.state.filteredData}
                     renderItem={({ item }) => (
-                        <View>
+                        <TouchableOpacity
+                            onPress={this.GetViewCategory.bind(
+                                this,
+                                item.id
+                            )}
+                        >
                             <Image
                                 source={Images[`${item.slug}`]}
                                 style={{ height: imageHeight, width: imageWidth }}
                             />
                             <Text
                                 style={styles.RowContainer}
-                                onPress={this.GetViewCategory.bind(
-                                    this,
-                                    item.id
-                                )}
+
                             >
-                                {item.name} ({item.count})
+                                {item.name.replace("&#039;", "'")} ({item.count})
                         </Text>
-                        </View>
+                        </TouchableOpacity>
                     )}
                     ItemSeparatorComponent={this.renderSeparator}
                     ListHeaderComponent={this.renderHeader}
