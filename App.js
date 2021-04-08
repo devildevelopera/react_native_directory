@@ -44,9 +44,9 @@ const TabNavigator = createMaterialTopTabNavigator(
 class LandingScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: '#FFF' }}>
-        <Image source={require('./assets/logo.png')} style={{ alignSelf: 'center', marginTop: '30%' }} />
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: '20%' }}>
+      <View style={styles.landingContainer}>
+        <Image source={require('./assets/logo.png')} style={styles.logoStyle} />
+        <View style={styles.leadButtonsStyle}>
           <TouchableOpacity
             title="Category View"
             style={styles.TouchableOpacityStyle}

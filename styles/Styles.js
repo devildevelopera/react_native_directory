@@ -2,6 +2,22 @@ import { Platform, StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
 
+    landingContainer: {
+        flex: 1,
+        backgroundColor: '#FFF'
+    },
+
+    logoStyle: {
+        alignSelf: 'center',
+        marginTop: '30%'
+    },
+
+    leadButtonsStyle: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginTop: '20%'
+    },
+
     TextInputStyleClass: {
         textAlign: 'center',
         marginBottom: 7,
