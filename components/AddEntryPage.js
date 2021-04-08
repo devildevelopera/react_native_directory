@@ -1,3 +1,4 @@
+import email from 'react-native-email'
 import React, { Component } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -20,7 +21,7 @@ class AddEntryPage extends Component {
             firstName: '',
             lastname: '',
             selectedItems: [],
-            contacts: [],
+            businessHours: [],
             date: new Date(),
             email: '',
             phone: '',
@@ -82,54 +83,102 @@ class AddEntryPage extends Component {
         } else {
             this.setState({
                 isFormValid: true,
-                errorMessage: '',
-                isLoading: true
+                errorMessage: ''
             });
 
-            fetch(baseUrl + '/entry', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    product_name: this.state.organizationName,
-                    department: this.state.department,
-                    firstName: this.state.firstName,
-                    lastname: this.state.lastname
-                })
-            })
-                .then((response) => response.json())
-                .then((responseJson) => {
-                    this.setState({
-                        apiResult: responseJson.toString()
-                    });
-                    if (responseJson.success) {
-                        this.setState({
-                            isLoading: false
-                        });
-                        this.ClearState();
-                        Alert.alert('Add Entry Success', 'Entry has been saved successfully', [{
-                            text: 'OK',
-                            onPress: () => {
-                                this.ClearState();
-                            }
-                        }], {
-                            cancelable: false
-                        });
-                    } else {
-                        this.setState({
-                            isLoading: false
-                        });
-                        Alert.alert('Failed to save entry');
+            const { businessHours } = this.state;
+
+            let businessHoursReal = [];
+            for (let i = 0; i < businessHours.length; i++) {
+                if (!businessHours[i].start_time.includes('Date') && !businessHours[i].end_time.includes('Date')) {
+                    let key = businessHours[i].end_time.replace('_end', '');
+                    let item = businessHours[i][`${key}`];
+                    if (Object.keys(item).length !== 0) {
+                        let itemWithDate = {};
+                        itemWithDate['Date'] = key;
+                        itemWithDate['Start Time'] = new Date(item.start_date).getHours() + ':' + new Date(item.start_date).getMinutes();
+                        itemWithDate['End Time'] = new Date(item.end_date).getHours() + ':' + new Date(item.end_date).getMinutes();
+                        businessHoursReal.push(itemWithDate);
                     }
-                })
-                .catch((error) => {
-                    this.setState({
-                        isLoading: false
-                    });
-                    console.error(error);
-                });
+                }
+            }
+
+            let businessHoursRealString = '';
+            for (let i = 0; i < businessHoursReal.length; i++) {
+                businessHoursRealString = businessHoursRealString + businessHoursReal[i]['Date'] + '(' + businessHoursReal[i]['Start Time'] + '~' + businessHoursReal[i]['End Time'] + ') \n';
+            }
+
+            const to = ['tiaan@email.com', 'foo@bar.com'] // string or array of email addresses
+            email(to, {
+                // Optional additional arguments
+                cc: ['bazzy@moo.com', 'doooo@daaa.com'], // string or array of email addresses
+                bcc: 'mee@mee.com', // string or array of email addresses
+                subject: 'Adding My New Entry',
+                body:
+                    `Here is my new entry details
+Organization Name: ${this.state.organizationName}
+Department: ${this.state.department}
+First Name: ${this.state.firstName}
+Last Name: ${this.state.lastname}
+Category: ${this.state.selectedItems.join()}
+Business Hours: ${businessHoursRealString.replace(/\s+/g, ' ').trim()}
+Email: ${this.state.email}
+Phone: ${this.state.phone}
+Website: ${this.state.website}
+Notes: ${this.state.notes}
+`
+            }).catch(console.error)
+
+            // fetch(baseUrl + '/entry', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Accept': 'application/json',
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({
+            //         organizationName: this.state.organizationName,
+            //         department: this.state.department,
+            //         firstName: this.state.firstName,
+            //         lastname: this.state.lastname,
+            //         selectedItems: this.state.selectedItems,
+            //         businessHours: this.state.businessHours,
+            //         email: this.state.email,
+            //         phone: this.state.phone,
+            //         website: this.state.website,
+            //         notes: this.state.notes,
+            //     })
+            // })
+            //     .then((response) => response.json())
+            //     .then((responseJson) => {
+            //         this.setState({
+            //             apiResult: responseJson.toString()
+            //         });
+            //         if (responseJson.success) {
+            //             this.setState({
+            //                 isLoading: false
+            //             });
+            //             this.ClearState();
+            //             Alert.alert('Add Entry Success', 'Entry has been saved successfully', [{
+            //                 text: 'OK',
+            //                 onPress: () => {
+            //                     this.ClearState();
+            //                 }
+            //             }], {
+            //                 cancelable: false
+            //             });
+            //         } else {
+            //             this.setState({
+            //                 isLoading: false
+            //             });
+            //             Alert.alert('Failed to save entry');
+            //         }
+            //     })
+            //     .catch((error) => {
+            //         this.setState({
+            //             isLoading: false
+            //         });
+            //         console.error(error);
+            //     });
         }
     }
 
@@ -182,7 +231,7 @@ class AddEntryPage extends Component {
             firstName: '',
             lastname: '',
             selectedItems: [],
-            contacts: [],
+            businessHours: [],
             date: new Date(),
             email: '',
             phone: '',
@@ -272,7 +321,7 @@ class AddEntryPage extends Component {
                     <SectionedMultiSelect
                         items={this.state.categories}
                         IconRenderer={MaterialIcons}
-                        uniqueKey="id"
+                        uniqueKey="name"
                         displayKey="name"
                         selectText="Choose category..."
                         onSelectedItemsChange={this.onSelectedItemsChange}
@@ -289,8 +338,8 @@ class AddEntryPage extends Component {
                         size={20}
                         color="#00BCD4"
                         onPress={() => {
-                            let contacts = JSON.parse(JSON.stringify(this.state.contacts));
-                            contacts.push({
+                            let businessHours = JSON.parse(JSON.stringify(this.state.businessHours));
+                            businessHours.push({
                                 'Monday': {},
                                 'Tuesday': {},
                                 'Wednesday': {},
@@ -304,13 +353,13 @@ class AddEntryPage extends Component {
                                 "end_picker_show": false,
                             });
                             this.setState({
-                                contacts: contacts
+                                businessHours: businessHours
                             })
                         }}
                     />
                 </View>
 
-                {this.state.contacts.map((item, index) => (
+                {this.state.businessHours.map((item, index) => (
                     <View key={index} >
                         <View style={styles.timeRangeStyle}>
                             <View style={{ flex: 1, marginVertical: 10 }}>
@@ -326,11 +375,11 @@ class AddEntryPage extends Component {
                                     ]}
                                     placeholder={{ label: 'Date', value: '' }}
                                     onValueChange={item1 => {
-                                        let contacts = [...this.state.contacts];
+                                        let businessHours = [...this.state.businessHours];
                                         item.start_time = item1 + '_start';
                                         item.end_time = item1 + '_end';
                                         this.setState({
-                                            contacts: contacts
+                                            businessHours: businessHours
                                         })
                                     }}
                                     style={{ inputAndroid: { color: '#333' } }}
@@ -342,10 +391,10 @@ class AddEntryPage extends Component {
                                 size={20}
                                 color="#FF5722"
                                 onPress={() => {
-                                    var contacts = JSON.parse(JSON.stringify(this.state.contacts));
-                                    contacts.splice(index, 1);
+                                    var businessHours = JSON.parse(JSON.stringify(this.state.businessHours));
+                                    businessHours.splice(index, 1);
                                     this.setState({
-                                        contacts: contacts
+                                        businessHours: businessHours
                                     })
                                 }} />
                         </View>
@@ -358,12 +407,12 @@ class AddEntryPage extends Component {
                                 is24Hour={true}
                                 display="default"
                                 onChange={(event, selectedDate) => {
-                                    let contacts = [...this.state.contacts];
+                                    let businessHours = [...this.state.businessHours];
                                     item[`${item.start_time.replace('_start', '')}`].start_date = selectedDate;
                                     item.start_picker_show = false;
 
                                     this.setState({
-                                        contacts: contacts
+                                        businessHours: businessHours
                                     })
                                 }}
                             />
@@ -377,13 +426,13 @@ class AddEntryPage extends Component {
                                 is24Hour={true}
                                 display="default"
                                 onChange={(event, selectedDate) => {
-                                    let contacts = [...this.state.contacts];
+                                    let businessHours = [...this.state.businessHours];
 
                                     item[`${item.end_time.replace('_end', '')}`].end_date = selectedDate;
                                     item.end_picker_show = false;
 
                                     this.setState({
-                                        contacts: contacts
+                                        businessHours: businessHours
                                     })
                                 }}
                             />
@@ -393,10 +442,10 @@ class AddEntryPage extends Component {
                                 <TouchableOpacity
                                     style={styles.width50}
                                     onPress={() => {
-                                        let contacts = [...this.state.contacts];
+                                        let businessHours = [...this.state.businessHours];
                                         item.start_picker_show = true;
                                         this.setState({
-                                            contacts: contacts
+                                            businessHours: businessHours
                                         })
                                     }}>
                                     <TextInput
@@ -412,10 +461,10 @@ class AddEntryPage extends Component {
                                 <TouchableOpacity
                                     style={styles.width50}
                                     onPress={() => {
-                                        let contacts = [...this.state.contacts];
+                                        let businessHours = [...this.state.businessHours];
                                         item.end_picker_show = true;
                                         this.setState({
-                                            contacts: contacts
+                                            businessHours: businessHours
                                         })
                                     }}>
                                     <TextInput
