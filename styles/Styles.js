@@ -4,12 +4,12 @@ export default styles = StyleSheet.create({
 
     landingContainer: {
         flex: 1,
-        backgroundColor: '#FFF'
+        backgroundColor: '#FFF',
+        justifyContent: 'center'
     },
 
     logoStyle: {
-        alignSelf: 'center',
-        marginTop: '30%'
+        alignSelf: 'center'
     },
 
     leadButtonsStyle: {
