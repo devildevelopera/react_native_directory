@@ -80,7 +80,8 @@ const StackNavigation = createStackNavigator(
       headerStyle: {
         height: 0
       },
-      headerLeft: () => null
+      headerLeft: () => null,
+      headerTitle: () => null
     }
   }
 );
