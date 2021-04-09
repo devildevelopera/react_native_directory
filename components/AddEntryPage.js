@@ -411,7 +411,7 @@ Notes: ${this.state.notes}
                                 value={this.state.date}
                                 mode="time"
                                 is24Hour={true}
-                                display="default"
+                                display={Platform.OS === 'ios' ? 'spinner' : 'default' }
                                 onChange={(event, selectedDate) => {
                                     let businessHours = [...this.state.businessHours];
                                     item[`${item.start_time.replace('_start', '')}`].start_date = selectedDate;
@@ -430,7 +430,7 @@ Notes: ${this.state.notes}
                                 value={this.state.date}
                                 mode="time"
                                 is24Hour={true}
-                                display="default"
+                                display={Platform.OS === 'ios' ? 'spinner' : 'default' }
                                 onChange={(event, selectedDate) => {
                                     let businessHours = [...this.state.businessHours];
 
