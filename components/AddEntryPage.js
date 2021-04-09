@@ -6,6 +6,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import { View, Text, TextInput, Alert, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import styles from '../styles/Styles';
 import baseUrl from '../constants/api';
@@ -250,6 +251,11 @@ Notes: ${this.state.notes}
         });
     }
 
+    hideDatePicker = () => {
+      };
+    
+      handleConfirm = (date) => {
+      };
 
     render() {
 
@@ -404,45 +410,46 @@ Notes: ${this.state.notes}
                                     })
                                 }} />
                         </View>
+                        <DateTimePickerModal
+                            isVisible={item.start_picker_show }
+                            mode="time"
+                            onConfirm={(selectedDate) => {
+                                let businessHours = [...this.state.businessHours];
+                                item[`${item.start_time.replace('_start', '')}`].start_date = selectedDate;
+                                item.start_picker_show = false;
 
-                        {item.start_picker_show &&
-                            <DateTimePicker
-                                testID="dateTimePicker"
-                                value={this.state.date}
-                                mode="time"
-                                is24Hour={true}
-                                display={Platform.OS === 'ios' ? 'spinner' : 'default' }
-                                onChange={(event, selectedDate) => {
-                                    let businessHours = [...this.state.businessHours];
-                                    item[`${item.start_time.replace('_start', '')}`].start_date = selectedDate;
-                                    item.start_picker_show = false;
+                                this.setState({
+                                    businessHours: businessHours
+                                })
+                            }}
+                            onCancel={() => {
+                                let businessHours = [...this.state.businessHours];
+                                item.start_picker_show = true;
+                                this.setState({
+                                    businessHours: businessHours
+                                })
+                            }}
+                        />
+                        <DateTimePickerModal
+                            isVisible={item.end_picker_show }
+                            mode="time"
+                            onConfirm={(selectedDate) => {
+                                let businessHours = [...this.state.businessHours];
+                                item[`${item.end_time.replace('_end', '')}`].end_date = selectedDate;
+                                item.end_picker_show = false;
 
-                                    this.setState({
-                                        businessHours: businessHours
-                                    })
-                                }}
-                            />
-                        }
-
-                        {item.end_picker_show &&
-                            <DateTimePicker
-                                testID="dateTimePicker"
-                                value={this.state.date}
-                                mode="time"
-                                is24Hour={true}
-                                display={Platform.OS === 'ios' ? 'spinner' : 'default' }
-                                onChange={(event, selectedDate) => {
-                                    let businessHours = [...this.state.businessHours];
-
-                                    item[`${item.end_time.replace('_end', '')}`].end_date = selectedDate;
-                                    item.end_picker_show = false;
-
-                                    this.setState({
-                                        businessHours: businessHours
-                                    })
-                                }}
-                            />
-                        }
+                                this.setState({
+                                    businessHours: businessHours
+                                })
+                            }}
+                            onCancel={() => {
+                                let businessHours = [...this.state.businessHours];
+                                item.end_picker_show = true;
+                                this.setState({
+                                    businessHours: businessHours
+                                })
+                            }}
+                        />
                         <View style={styles.timeRangeStyle}>
                             {item.start_time !== 'Date' &&
                                 <TouchableOpacity
@@ -460,6 +467,7 @@ Notes: ${this.state.notes}
                                         placeholder="Start Time"
                                         placeholderTextColor="#a6b0bb"
                                         editable={false}
+                                        pointerEvents="none"
                                     />
                                 </TouchableOpacity>
                             }
@@ -479,6 +487,7 @@ Notes: ${this.state.notes}
                                         placeholder="End Time"
                                         placeholderTextColor="#a6b0bb"
                                         editable={false}
+                                        pointerEvents="none"
                                     />
                                 </TouchableOpacity>
                             }
@@ -486,7 +495,6 @@ Notes: ${this.state.notes}
                     </View>
                 ))
                 }
-
                 <TextInput
                     ref='txtEmail'
                     placeholder='Email'
