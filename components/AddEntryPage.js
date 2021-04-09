@@ -191,6 +191,12 @@ Notes: ${this.state.notes}
         return fetch(url)
             .then((response) => response.json())
             .then((responseJson) => {
+                for (var i = 0; i < responseJson.length; i++) {
+                    if (responseJson[i].name.includes('&#039;')) {
+                        responseJson[i].name = responseJson[i].name.replace("&#039;", "'");
+                        break;
+                    }
+                }
                 if (responseJson.length > 0) {
                     this.setState({
                         loading: false,
