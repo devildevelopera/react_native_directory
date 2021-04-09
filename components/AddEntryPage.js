@@ -2,7 +2,6 @@ import email from 'react-native-email'
 import React, { Component } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import { View, Text, TextInput, Alert, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';

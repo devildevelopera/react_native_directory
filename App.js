@@ -1,11 +1,12 @@
 import React from 'react';
 import { Dimensions, Platform } from 'react-native';
 import { createAppContainer } from 'react-navigation';
+import SplashScreen from 'react-native-splash-screen';
 import { createStackNavigator } from 'react-navigation-stack';
+import { View, Image, TouchableOpacity, Text } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
-import { View, Image, TouchableOpacity, Text } from 'react-native';
 
 import styles from './styles/Styles';
 import AddEntryPage from './components/AddEntryPage';
@@ -42,6 +43,11 @@ const TabNavigator = createMaterialTopTabNavigator(
 });
 
 class LandingScreen extends React.Component {
+
+  componentDidMount() {
+      SplashScreen.hide();
+  }
+  
   render() {
     return (
       <View style={styles.landingContainer}>
