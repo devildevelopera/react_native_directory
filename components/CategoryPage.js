@@ -189,7 +189,7 @@ class CategoryPage extends React.Component {
                     ListFooterComponent={() => {
                         if (this.state.loadMore) {
                             return <View style={{ flex: 1, paddingTop: 20 }}>
-                                <ActivityIndicator />
+                                <ActivityIndicator size="large" color="#2196f3" />
                             </View>
                         }
                         return null;
