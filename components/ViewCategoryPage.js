@@ -10,9 +10,13 @@ class ViewCategoryPage extends React.Component {
 
         this.state = {
             data: [],
-            filteredData: [],
             loading: true,
+            refreshing: false,
+            loadMore: false,
+            page: 0,
+            pageSize: 10,
             keyword: '',
+            shouldRefresh: false
         };
     }
 
@@ -25,20 +29,24 @@ class ViewCategoryPage extends React.Component {
     }
 
     LoadEntires = () => {
-        let url = baseUrl + '/entry'
+        let tempPage = this.state.page + 1;
+        let url = baseUrl + '/entry/?page=' + tempPage.toString() + '&per_page' + this.state.pageSize.toString();
         return fetch(url)
             .then((response) => response.json())
             .then((responseJson) => {
                 if (responseJson.length > 0) {
-                    const filteredJson = responseJson;
                     this.setState({
                         loading: false,
-                        data: [...this.state.data, ...responseJson],
-                        filteredData: [...this.state.data, ...filteredJson],
+                        loadMore: false,
+                        refreshing: false,
+                        data: (this.state.page === 0) ? responseJson : [...this.state.data, ...responseJson],
+                        page: this.state.page + 1
                     });
                 } else {
                     this.setState({
                         loading: false,
+                        loadMore: false,
+                        refreshing: false
                     });
                 }
             })
@@ -46,6 +54,30 @@ class ViewCategoryPage extends React.Component {
                 console.error(error);
             });
 
+    }
+
+    Refresh = () => {
+        this.setState({
+            page: 0,
+            data: [],
+            refreshing: false,
+            loading: true,
+            keyword: ''
+        }, () => {
+            this.LoadEntires();
+        });
+    }
+
+    LoadMore = () => {
+        if (this.state.loading || this.state.loadMore) return null;
+
+        if (this.state.data.length < this.state.pageSize) return null;
+
+        this.setState({
+            loadMore: true
+        }, () => {
+            this.LoadEntires();
+        });
     }
 
     renderSeparator = () => {
@@ -66,12 +98,13 @@ class ViewCategoryPage extends React.Component {
     }
 
     Search = () => {
-        Search = () => {
-            const filteredJson = this.state.data.filter((item) => item.fn.rendered.toLowerCase().includes(this.state.keyword.toLowerCase()));
-            this.setState({
-                filteredData: filteredJson,
-            });
-        }
+        this.setState({
+            loading: true,
+            page: 0,
+            data: []
+        }, () => {
+            this.LoadEntires();
+        });
     }
 
     renderHeader = () => {
@@ -100,7 +133,7 @@ class ViewCategoryPage extends React.Component {
                 />
                 {this.renderSeparator()}
                 <FlatList
-                    data={this.state.filteredData}
+                    data={this.state.data}
                     renderItem={({ item }) => (
                         <View>
                             <Text
@@ -114,8 +147,21 @@ class ViewCategoryPage extends React.Component {
                             </Text>
                         </View>
                     )}
+                    keyExtractor={item => item.id.toString()}
                     ItemSeparatorComponent={this.renderSeparator}
+                    onRefresh={this.Refresh}
+                    refreshing={this.state.refreshing}
+                    onEndReached={() => this.LoadMore()}
                     ListHeaderComponent={this.renderHeader}
+                    ListFooterComponent={() => {
+                        if (this.state.loadMore) {
+                            return <View style={{ flex: 1, paddingTop: 20 }}>
+                                <ActivityIndicator size="large" color="#2196f3" />
+                            </View>
+                        }
+                        return null;
+                    }}
+                    onEndReachedThreshold='0.3'
                 />
             </View>
         );
