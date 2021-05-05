@@ -280,13 +280,9 @@ Notes: ${this.state.notes}
                             organizationName: value
                         })
                     }
-                    onSubmitEditing={(event) => {
-                        this.refs.txtDepartment.focus();
-                    }}
                     value={this.state.organizationName} />
 
                 <TextInput
-                    ref='txtDepartment'
                     placeholder='Department Name'
                     style={styles.TextInputStyleClass}
                     underlineColorAndroid='transparent'
@@ -295,13 +291,9 @@ Notes: ${this.state.notes}
                             department: value
                         })
                     }
-                    onSubmitEditing={(event) => {
-                        this.refs.txtFirstName.focus();
-                    }}
                     value={this.state.department} />
 
                 <TextInput
-                    ref='txtFirstName'
                     placeholder='First Name'
                     style={styles.TextInputStyleClass}
                     underlineColorAndroid='transparent'
@@ -310,13 +302,9 @@ Notes: ${this.state.notes}
                             firstName: value
                         })
                     }
-                    onSubmitEditing={(event) => {
-                        this.refs.txtLastName.focus();
-                    }}
                     value={this.state.firstName != 0 ? this.state.firstName.toString() : ''} />
 
                 <TextInput
-                    ref='txtLastName'
                     placeholder='Last Name'
                     style={styles.TextInputStyleClass}
                     underlineColorAndroid='transparent'
@@ -495,7 +483,6 @@ Notes: ${this.state.notes}
                 ))
                 }
                 <TextInput
-                    ref='txtEmail'
                     placeholder='Email'
                     style={styles.TextInputStyleClass}
                     underlineColorAndroid='transparent'
@@ -504,13 +491,9 @@ Notes: ${this.state.notes}
                             email: value
                         })
                     }
-                    onSubmitEditing={(event) => {
-                        this.refs.txtPhone.focus();
-                    }}
                     value={this.state.email != 0 ? this.state.email.toString() : ''} />
 
                 <TextInput
-                    ref='txtPhone'
                     placeholder='Phone'
                     style={styles.TextInputStyleClass}
                     underlineColorAndroid='transparent'
@@ -519,13 +502,9 @@ Notes: ${this.state.notes}
                             phone: value
                         })
                     }
-                    onSubmitEditing={(event) => {
-                        this.refs.txtWebsite.focus();
-                    }}
                     value={this.state.phone != 0 ? this.state.phone.toString() : ''} />
 
                 <TextInput
-                    ref='txtWebsite'
                     placeholder='Website'
                     style={styles.TextInputStyleClass}
                     underlineColorAndroid='transparent'
@@ -534,13 +513,9 @@ Notes: ${this.state.notes}
                             website: value
                         })
                     }
-                    onSubmitEditing={(event) => {
-                        this.refs.txtNotes.focus();
-                    }}
                     value={this.state.website != 0 ? this.state.website.toString() : ''} />
 
                 <TextInput
-                    ref='txtNotes'
                     placeholder='Input Notes'
                     multiline={true}
                     style={styles.NotesInputStyleClass}
