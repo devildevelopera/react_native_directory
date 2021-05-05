@@ -43,7 +43,7 @@ export default styles = StyleSheet.create({
         padding: 10,
         borderRadius: 5,
         marginBottom: 7,
-        backgroundColor: '#00BCD4'
+        backgroundColor: '#acd300'
     },
 
     TextStyle: {

@@ -251,10 +251,10 @@ Notes: ${this.state.notes}
     }
 
     hideDatePicker = () => {
-      };
-    
-      handleConfirm = (date) => {
-      };
+    };
+
+    handleConfirm = (date) => {
+    };
 
     render() {
 
@@ -347,7 +347,7 @@ Notes: ${this.state.notes}
                     <FontAwesomeIcons
                         name="plus-circle"
                         size={20}
-                        color="#00BCD4"
+                        color="#acd300"
                         onPress={() => {
                             let businessHours = JSON.parse(JSON.stringify(this.state.businessHours));
                             businessHours.push({
@@ -410,7 +410,7 @@ Notes: ${this.state.notes}
                                 }} />
                         </View>
                         <DateTimePickerModal
-                            isVisible={item.start_picker_show }
+                            isVisible={item.start_picker_show}
                             mode="time"
                             onConfirm={(selectedDate) => {
                                 let businessHours = [...this.state.businessHours];
@@ -430,7 +430,7 @@ Notes: ${this.state.notes}
                             }}
                         />
                         <DateTimePickerModal
-                            isVisible={item.end_picker_show }
+                            isVisible={item.end_picker_show}
                             mode="time"
                             onConfirm={(selectedDate) => {
                                 let businessHours = [...this.state.businessHours];

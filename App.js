@@ -1,14 +1,11 @@
-import React from 'react';
 import { Dimensions, Platform } from 'react-native';
 import { createAppContainer } from 'react-navigation';
-import SplashScreen from 'react-native-splash-screen';
 import { createStackNavigator } from 'react-navigation-stack';
-import { View, Image, TouchableOpacity, Text } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 
-import styles from './styles/Styles';
+import LandingPage from './components/LandingPage';
 import AddEntryPage from './components/AddEntryPage';
 import CategoryPage from './components/CategoryPage';
 import ViewEntryPage from './components/ViewEntryPage';
@@ -21,75 +18,42 @@ const d = Dimensions.get("window");
 const isX = Platform.OS === "ios" && (d.height > 800 || d.width > 800) ? true : false;
 
 const CategoryNavigation = createStackNavigator({
-  Category: { screen: CategoryPage },
-  ViewCategory: { screen: ViewCategoryPage },
-  ViewEntry: { screen: ViewEntryPage }
+    Category: { screen: CategoryPage },
+    ViewCategory: { screen: ViewCategoryPage },
+    ViewEntry: { screen: ViewEntryPage }
 });
 
 const AddEntryNavigation = createStackNavigator({
-  AddEntry: { screen: AddEntryPage }
+    AddEntry: { screen: AddEntryPage }
 });
 
-const TabNavigator = createMaterialTopTabNavigator(
-  {
+const TabNavigator = createMaterialTopTabNavigator({
     Cat: CategoryNavigation,
     Add: AddEntryNavigation,
-  }, {
-  tabBarOptions: {
-    style: {
-      paddingTop: Platform.OS === "ios" && isX ? 40 : 0,
+}, {
+    tabBarOptions: {
+        style: {
+            paddingTop: Platform.OS === "ios" && isX ? 40 : 0,
+            backgroundColor: '#acd300'
+        }
     }
-  }
 });
 
-class LandingScreen extends React.Component {
-
-  componentDidMount() {
-      SplashScreen.hide();
-  }
-  
-  render() {
-    return (
-      <View style={styles.landingContainer}>
-        <Image source={require('./assets/logo.png')} style={styles.logoStyle} />
-        <View style={styles.leadButtonsStyle}>
-          <TouchableOpacity
-            title="Category View"
-            style={styles.TouchableOpacityStyle}
-            onPress={() => this.props.navigation.navigate('Category')}>
-            <Text style={styles.TextStyle}> Category View </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            title="Add New Entry"
-            style={styles.TouchableOpacityStyle}
-            onPress={() => this.props.navigation.navigate('AddEntry')}>
-            <Text style={styles.TextStyle}> Add New Entry </Text>
-          </TouchableOpacity>
-
-        </View>
-      </View>
-    );
-  }
-}
-
-const StackNavigation = createStackNavigator(
-  {
+const StackNavigation = createStackNavigator({
     Landing: {
-      screen: LandingScreen
+        screen: LandingPage
     },
     Home: {
-      screen: TabNavigator
+        screen: TabNavigator
     },
-  },
-  {
+}, {
     defaultNavigationOptions: {
-      headerStyle: {
-        height: 0
-      },
-      headerLeft: () => null,
-      headerTitle: () => null
+        headerStyle: {
+            height: 0
+        },
+        headerLeft: () => null,
+        headerTitle: () => null
     }
-  }
-);
+});
 
 export default createAppContainer(StackNavigation);
