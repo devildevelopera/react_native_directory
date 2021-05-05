@@ -19,12 +19,12 @@ export default styles = StyleSheet.create({
     },
 
     TextInputStyleClass: {
-        textAlign: 'center',
         marginBottom: 7,
         height: 40,
         borderWidth: 1,
         borderColor: '#FF5722',
         borderRadius: 5,
+        paddingLeft: 10
     },
 
     NotesInputStyleClass: {
