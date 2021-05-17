@@ -16,13 +16,11 @@ class LandingPage extends React.Component {
                 <Image source={require('../assets/logo.png')} style={styles.logoStyle} />
                 <View style={styles.leadButtonsStyle}>
                     <TouchableOpacity
-                        title="Category View"
                         style={styles.TouchableOpacityStyle}
                         onPress={() => this.props.navigation.navigate('Category')}>
-                        <Text style={styles.TextStyle}> Category View </Text>
+                        <Text style={styles.TextStyle}>View All Entries</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        title="Add New Entry"
                         style={styles.TouchableOpacityStyle}
                         onPress={() => this.props.navigation.navigate('AddEntry')}>
                         <Text style={styles.TextStyle}> Add New Entry </Text>
