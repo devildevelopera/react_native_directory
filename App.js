@@ -96,7 +96,7 @@ const TabNavigator = createBottomTabNavigator({
 }, {
     tabBarOptions: {
         style: {
-            height: 60,
+            height: isX? 50 : 60,
             backgroundColor: '#acd300'
         },
         labelStyle: {
@@ -106,7 +106,8 @@ const TabNavigator = createBottomTabNavigator({
         tabStyle: {
             paddingVertical: 5,
             borderColor: '#fff',
-            borderLeftWidth: 0.5
+            borderLeftWidth: 0.5,
+            marginBottom: isX ? -10 : 0
         }
     }
 });
