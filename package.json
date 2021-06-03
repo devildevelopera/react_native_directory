@@ -16,6 +16,7 @@
     "react-native": "0.64.0",
     "react-native-email": "^1.1.0",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-htmlview": "^0.16.0",
     "react-native-maps": "^0.27.1",
     "react-native-modal-datetime-picker": "^9.2.0",
     "react-native-picker-select": "^8.0.4",

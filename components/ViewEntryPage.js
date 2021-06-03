@@ -1,5 +1,6 @@
-import MapView, { Marker } from 'react-native-maps';
 import React, { Component } from 'react';
+import HTMLView from 'react-native-htmlview';
+import MapView, { Marker } from 'react-native-maps';
 import { View, Text, ActivityIndicator, Image, ScrollView } from 'react-native';
 
 import styles from '../styles/Styles';
@@ -150,11 +151,10 @@ class ViewEntryPage extends Component {
                     >
                         Notes
                     </Text>
-                    <Text
+                    <HTMLView
                         style={styles.RowContainer}
-                    >
-                        This is test note, the content is not coming from API
-                    </Text>
+                        value={entry.notes.rendered}
+                    />
                     {entry.adr.length > 0 && entry.adr[0].latitude && entry.adr[0].longitude &&
                         <View
                             style={styles.mapView}
