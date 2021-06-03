@@ -101,12 +101,12 @@ const TabNavigator = createBottomTabNavigator({
         },
         labelStyle: {
             fontSize: 15,
-            color: '#333',
-            paddingBottom: 5
+            color: '#333'
         },
         tabStyle: {
+            paddingVertical: 5,
             borderColor: '#fff',
-            borderWidth: 0.5
+            borderLeftWidth: 0.5
         }
     }
 });
