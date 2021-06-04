@@ -18,7 +18,7 @@ class LandingPage extends React.Component {
                     <TouchableOpacity
                         style={styles.TouchableOpacityStyle}
                         onPress={() => this.props.navigation.navigate('Category')}>
-                        <Text style={styles.TextStyle}>View All Entries</Text>
+                        <Text style={styles.TextStyle}>View Directory</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.TouchableOpacityStyle}

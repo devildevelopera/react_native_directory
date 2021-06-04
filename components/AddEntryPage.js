@@ -35,7 +35,7 @@ class AddEntryPage extends Component {
     }
 
     static navigationOptions = {
-        title: 'Submit New Entry',
+        title: 'Submit New/Update Entry',
         headerLeft: () => null,
     };
 
