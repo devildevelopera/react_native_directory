@@ -21,7 +21,11 @@ class ViewCategoryPage extends React.Component {
     }
 
     static navigationOptions = {
-        title: 'Entries'
+        title: 'Entries',
+        headerStyle: {
+            backgroundColor: '#acd300',
+        },
+        headerTintColor: '#fff',
     };
 
     componentDidMount() {

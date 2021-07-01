@@ -12,6 +12,7 @@ import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import LandingPage from './components/LandingPage';
 import AddEntryPage from './components/AddEntryPage';
 import CategoryPage from './components/CategoryPage';
+import CategoryPageTemp from './components/CategoryPageTemp';
 import ViewEntryPage from './components/ViewEntryPage';
 import ViewCategoryPage from './components/ViewCategoryPage';
 
@@ -24,7 +25,11 @@ const d = Dimensions.get("window");
 const isX = Platform.OS === "ios" && (d.height > 800 || d.width > 800) ? true : false;
 
 const CategoryNavigation = createStackNavigator({
-    Category: { screen: CategoryPage },
+    Category: {
+        screen: CategoryPageTemp, navigationOptions: {
+            header: null,
+        },
+    },
     ViewEntry: { screen: ViewEntryPage },
     ViewCategory: { screen: ViewCategoryPage }
 });
@@ -96,7 +101,7 @@ const TabNavigator = createBottomTabNavigator({
 }, {
     tabBarOptions: {
         style: {
-            height: isX? 50 : 60,
+            height: isX ? 50 : 60,
             backgroundColor: '#acd300'
         },
         labelStyle: {
@@ -129,4 +134,4 @@ const TabNavigator = createBottomTabNavigator({
 //     }
 // });
 
-export default createAppContainer(TabNavigator);
+export default createAppContainer(CategoryNavigation);

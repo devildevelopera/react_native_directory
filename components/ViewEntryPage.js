@@ -20,6 +20,10 @@ class ViewEntryPage extends Component {
 
     static navigationOptions = {
         title: 'Entry Detail',
+        headerStyle: {
+            backgroundColor: '#acd300',
+        },
+        headerTintColor: '#fff',
     };
 
     componentDidMount() {
@@ -106,7 +110,7 @@ class ViewEntryPage extends Component {
                             style={styles.RowTitleContainer}
                         >
                             Address
-                    </Text>
+                        </Text>
                     }
                     {entry.adr.map((item, index) => (
                         <Text
@@ -121,7 +125,7 @@ class ViewEntryPage extends Component {
                             style={styles.RowTitleContainer}
                         >
                             Email
-                    </Text>
+                        </Text>
                     }
                     {entry.email.map((item, index) => (
                         <Text
@@ -136,7 +140,7 @@ class ViewEntryPage extends Component {
                             style={styles.RowTitleContainer}
                         >
                             Phone
-                    </Text>
+                        </Text>
                     }
                     {entry.tel.map((item, index) => (
                         <Text
