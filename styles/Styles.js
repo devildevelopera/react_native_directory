@@ -9,7 +9,17 @@ export default styles = StyleSheet.create({
     },
 
     landingDropdown: {
-        marginHorizontal: 16
+        display: "flex",
+        alignItems: "center",
+        marginHorizontal: 16,
+    },
+
+    viewButtonStyle: {
+        width: '50%',
+        padding: 10,
+        marginTop: 30,
+        borderRadius: 5,
+        backgroundColor: '#acd300'
     },
 
     logoStyle: {
