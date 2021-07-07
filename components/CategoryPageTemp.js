@@ -69,7 +69,7 @@ class CategoryPage extends React.Component {
             });
         }, 100)
 
-        if(this.state.activeCat) {
+        if (this.state.activeCat) {
             this.props.navigation.navigate('ViewCategory', {
                 categoryId: this.state.activeCat
             });
@@ -82,27 +82,27 @@ class CategoryPage extends React.Component {
                 <Image source={require('../assets/logo.png')} style={styles.logoStyle} />
                 <View style={styles.landingDropdown}>
                     {!this.state.loading ?
-                    <>
-                        <RNPickerSelect
-                            value={this.state.activeCat}
-                            placeholder={{ label: "Choose a Category", value: 0 }}
-                            onValueChange={(categoryId) => this.setState({activeCat: categoryId})}
-                            style={{
-                                inputAndroid: { height: 40, color: "#000" }, inputIOS: { height: 40, textAlign: "center" }, placeholder: { color: '#000' }
-                            }}
-                            items={this.state.data}
-                        />
-                        {this.state.activeCat != 0 &&
-                            <TouchableOpacity style={styles.viewButtonStyle} onPress={() => this.GetViewCategory()}>
-                               <Text style={styles.TextStyle}>View</Text>
-                           </TouchableOpacity>
-                           }
-                           </>:
+                        <>
+                            <RNPickerSelect
+                                value={this.state.activeCat}
+                                placeholder={{ label: "Choose a Category", value: 0 }}
+                                onValueChange={(categoryId) => this.setState({ activeCat: categoryId })}
+                                style={{
+                                    inputAndroid: { height: 40, color: "#000", textAlign: "center" }, inputIOS: { height: 40, color: "#000", textAlign: "center" }, placeholder: { color: '#000' }
+                                }}
+                                items={this.state.data}
+                            />
+                            {this.state.activeCat != 0 &&
+                                <TouchableOpacity style={styles.viewButtonStyle} onPress={() => this.GetViewCategory()}>
+                                    <Text style={styles.TextStyle}>View</Text>
+                                </TouchableOpacity>
+                            }
+                        </> :
                         <View style={{ flex: 1, paddingTop: 20 }}>
                             <ActivityIndicator size="large" color="#2196f3" />
                         </View>
                     }
-                   
+
                 </View>
             </View>
         );
