@@ -8,35 +8,39 @@ export default styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
+    landingDropdown: {
+        marginHorizontal: 16
+    },
+
     logoStyle: {
         alignSelf: 'center'
     },
 
     leadButtonsStyle: {
+        marginTop: '20%',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginTop: '20%'
     },
 
     TextInputStyleClass: {
-        marginBottom: 7,
         height: 40,
         borderWidth: 1,
-        borderColor: '#FF5722',
+        marginBottom: 7,
         borderRadius: 5,
-        paddingLeft: 10
+        paddingLeft: 10,
+        borderColor: '#FF5722',
     },
 
     NotesInputStyleClass: {
-        textAlign: 'center',
-        marginBottom: 7,
         padding: 10,
         height: 120,
-        textAlignVertical: 'top',
-        textAlign: 'left',
         borderWidth: 1,
-        borderColor: '#FF5722',
+        marginBottom: 7,
         borderRadius: 5,
+        textAlign: 'left',
+        textAlign: 'center',
+        textAlignVertical: 'top',
+        borderColor: '#FF5722',
     },
 
     TouchableOpacityStyle: {
@@ -53,27 +57,27 @@ export default styles = StyleSheet.create({
 
     RowTitleContainer: {
         fontSize: 20,
+        paddingTop: 10,
+        paddingLeft: 10,
         color: '#FF5722',
         paddingRight: 10,
-        paddingTop: 10,
-        paddingLeft: 10
     },
 
     RowContainer: {
         fontSize: 20,
-        paddingRight: 10,
         paddingTop: 10,
+        paddingLeft: 10,
+        paddingRight: 10,
         paddingBottom: 10,
-        paddingLeft: 10
     },
 
     FormContainer: {
         flex: 1,
-        paddingTop: (Platform.OS == 'ios') ? 20 : 0,
         marginLeft: 5,
         marginRight: 5,
         paddingHorizontal: 35,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        paddingTop: (Platform.OS == 'ios') ? 20 : 0,
     },
 
     BaseView: {
@@ -82,9 +86,9 @@ export default styles = StyleSheet.create({
     },
 
     SearchBox: {
+        height: 40,
         fontSize: 16,
         textAlign: 'center',
-        height: 40
     },
 
     mapView: {
@@ -93,24 +97,24 @@ export default styles = StyleSheet.create({
     },
 
     map: {
-        position: "absolute",
         top: 0,
         left: 0,
         right: 0,
-        bottom: 0
+        bottom: 0,
+        position: "absolute",
     },
 
     multiSelectView: {
         borderWidth: 1,
-        borderColor: '#FF5722',
         borderRadius: 5,
         marginBottom: 7,
+        borderColor: '#FF5722',
     },
 
     BusinessHoursSectionStyle: {
+        marginVertical: 10,
         flexDirection: 'row',
         alignItems: 'center',
-        marginVertical: 10,
     },
 
     font16: {
