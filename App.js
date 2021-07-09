@@ -49,7 +49,7 @@ const TabNavigator = createBottomTabNavigator({
     Cat: {
         screen: CategoryNavigation,
         navigationOptions: {
-            tabBarLabel: 'View All',
+            tabBarLabel: 'Derectory',
             tabBarIcon: () => (
                 <Ionicons size={25}
                     name="menu"
@@ -57,28 +57,30 @@ const TabNavigator = createBottomTabNavigator({
             )
         }
     },
+    /*     
     Add: {
-        screen: AddEntryNavigation,
-        navigationOptions: {
-            tabBarLabel: 'Sign Up',
-            tabBarIcon: () => (
-                <AntDesignIcons size={25}
-                    color='#fff'
-                    name="adduser" />
-            )
-        }
-    },
-    Update: {
-        screen: AddEntryNavigation,
-        navigationOptions: {
-            tabBarLabel: 'Update',
-            tabBarIcon: () => (
-                <MaterialIcons size={25}
-                    color='#fff'
-                    name="update" />
-            )
-        }
-    },
+            screen: AddEntryNavigation,
+            navigationOptions: {
+                tabBarLabel: 'Sign Up',
+                tabBarIcon: () => (
+                    <AntDesignIcons size={25}
+                        color='#fff'
+                        name="adduser" />
+                )
+            }
+        },
+        Update: {
+            screen: AddEntryNavigation,
+            navigationOptions: {
+                tabBarLabel: 'Update',
+                tabBarIcon: () => (
+                    <MaterialIcons size={25}
+                        color='#fff'
+                        name="update" />
+                )
+            }
+        },
+    */
     Back: {
         screen: LandingPage,
         navigationOptions: {
@@ -96,7 +98,7 @@ const TabNavigator = createBottomTabNavigator({
 }, {
     tabBarOptions: {
         style: {
-            height: isX? 50 : 60,
+            height: isX ? 50 : 60,
             backgroundColor: '#acd300'
         },
         labelStyle: {

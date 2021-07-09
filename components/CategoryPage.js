@@ -118,9 +118,10 @@ class CategoryPage extends React.Component {
         );
     }
 
-    GetViewCategory = (categoryId) => {
+    GetViewCategory = (categoryId, slug) => {
         this.props.navigation.navigate('ViewCategory', {
-            categoryId: categoryId
+            categoryId: categoryId,
+            imageSrc: Images[`${slug}`]
         });
     }
 
@@ -165,7 +166,8 @@ class CategoryPage extends React.Component {
                         <TouchableOpacity
                             onPress={this.GetViewCategory.bind(
                                 this,
-                                item.id
+                                item.id,
+                                item.slug
                             )}
                         >
                             <Image
@@ -177,7 +179,7 @@ class CategoryPage extends React.Component {
 
                             >
                                 {item.name.replace("&#039;", "'")} ({item.count})
-                        </Text>
+                            </Text>
                         </TouchableOpacity>
                     )}
                     keyExtractor={item => item.id.toString()}

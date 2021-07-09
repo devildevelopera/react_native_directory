@@ -20,11 +20,11 @@ class LandingPage extends React.Component {
                         onPress={() => this.props.navigation.navigate('Category')}>
                         <Text style={styles.TextStyle}>View Directory</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         style={styles.TouchableOpacityStyle}
                         onPress={() => this.props.navigation.navigate('AddEntry')}>
                         <Text style={styles.TextStyle}> Add New Entry </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </View>
         );

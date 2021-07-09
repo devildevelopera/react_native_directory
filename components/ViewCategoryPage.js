@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, FlatList, ActivityIndicator, Text, TextInput } from 'react-native';
+import { View, FlatList, ActivityIndicator, Text, TextInput, Image } from 'react-native';
 
 import styles from '../styles/Styles';
 import baseUrl from '../constants/api';
+import { imageHeight, imageWidth } from '../helper/Dimension';
 
 class ViewCategoryPage extends React.Component {
     constructor(props) {
@@ -16,6 +17,7 @@ class ViewCategoryPage extends React.Component {
             page: 0,
             pageSize: 10,
             keyword: '',
+            imageSrc: "",
             shouldRefresh: false
         };
     }
@@ -25,6 +27,10 @@ class ViewCategoryPage extends React.Component {
     };
 
     componentDidMount() {
+        this.setState({
+            imageSrc: this.props.navigation.state.params.imageSrc
+        });
+
         this.LoadEntires();
     }
 
@@ -132,6 +138,10 @@ class ViewCategoryPage extends React.Component {
                     style={styles.SearchBox}
                 />
                 {this.renderSeparator()}
+                <Image
+                    source={this.state.imageSrc}
+                    style={{ height: imageHeight, width: imageWidth }}
+                />
                 <FlatList
                     data={this.state.data}
                     renderItem={({ item }) => (
