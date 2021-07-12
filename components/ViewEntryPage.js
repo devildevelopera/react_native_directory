@@ -106,7 +106,7 @@ class ViewEntryPage extends Component {
                             style={styles.RowTitleContainer}
                         >
                             Address
-                    </Text>
+                        </Text>
                     }
                     {entry.adr.map((item, index) => (
                         <Text
@@ -121,7 +121,7 @@ class ViewEntryPage extends Component {
                             style={styles.RowTitleContainer}
                         >
                             Email
-                    </Text>
+                        </Text>
                     }
                     {entry.email.map((item, index) => (
                         <Text
@@ -136,7 +136,7 @@ class ViewEntryPage extends Component {
                             style={styles.RowTitleContainer}
                         >
                             Phone
-                    </Text>
+                        </Text>
                     }
                     {entry.tel.map((item, index) => (
                         <Text
@@ -146,6 +146,16 @@ class ViewEntryPage extends Component {
                             {this.getPhoneTitle(item.type)}: {item.number.rendered}
                         </Text>
                     ))}
+                    <Text
+                        style={styles.RowTitleContainer}
+                    >
+                        Bio
+                    </Text>
+                    <Text
+                        style={styles.RowContainer}
+                    >
+                        {entry.bio.rendered}
+                    </Text>
                     <Text
                         style={styles.RowTitleContainer}
                     >

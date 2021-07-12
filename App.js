@@ -46,10 +46,11 @@ const TabNavigator = createBottomTabNavigator({
             tabBarVisible: false
         },
     },
+    /*     
     Cat: {
         screen: CategoryNavigation,
         navigationOptions: {
-            tabBarLabel: 'Derectory',
+            tabBarLabel: 'Directory',
             tabBarIcon: () => (
                 <Ionicons size={25}
                     name="menu"
@@ -57,7 +58,6 @@ const TabNavigator = createBottomTabNavigator({
             )
         }
     },
-    /*     
     Add: {
             screen: AddEntryNavigation,
             navigationOptions: {
@@ -82,7 +82,7 @@ const TabNavigator = createBottomTabNavigator({
         },
     */
     Back: {
-        screen: LandingPage,
+        screen: CategoryNavigation,
         navigationOptions: {
             tabBarLabel: 'Back',
             tabBarIcon: () => (
