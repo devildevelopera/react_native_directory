@@ -1,4 +1,4 @@
-package com.directory;
+package com.alive_thrive;
 
 import com.facebook.react.ReactActivity;
 
