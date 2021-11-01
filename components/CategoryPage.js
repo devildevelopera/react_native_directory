@@ -9,7 +9,7 @@ export const Images = {
     'adult-education': require('../assets/adult-education.jpg'),
     'childcare': require('../assets/childcare.jpg'),
     'childrens-education': require('../assets/childrens-education.jpg'),
-    'community-involvement-social-support': require('../assets/community-involvement-social-support.jpg'),
+    'community-involvement-social-support': require('../assets/community-involvement-social-support-new.jpg'),
     'community-reentry-assistance': require('../assets/community-reentry-assistance.jpg'),
     'employment': require('../assets/employment.jpg'),
     'family-relations': require('../assets/family-relations.jpg'),
