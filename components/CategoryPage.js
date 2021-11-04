@@ -12,7 +12,7 @@ export const Images = {
     'community-involvement-social-support': require('../assets/community-involvement-social-support-new.jpg'),
     'community-reentry-assistance': require('../assets/community-reentry-assistance.jpg'),
     'employment': require('../assets/employment.jpg'),
-    'family-relations': require('../assets/family-relations.jpg'),
+    'family-relations': require('../assets/family-relations-new.jpg'),
     'food': require('../assets/food.jpg'),
     'healthcare-coverage': require('../assets/healthcare-coverage.jpg'),
     'housing': require('../assets/housing.jpg'),
