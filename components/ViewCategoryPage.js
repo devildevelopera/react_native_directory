@@ -36,7 +36,7 @@ class ViewCategoryPage extends React.Component {
 
     LoadEntires = () => {
         let tempPage = this.state.page + 1;
-        let url = baseUrl + '/entry/?page=' + tempPage.toString() + '&per_page' + this.state.pageSize.toString();
+        let url = baseUrl + '/entry/?page=' + tempPage.toString() + '&per_page=' + this.state.pageSize.toString();
         return fetch(url)
             .then((response) => response.json())
             .then((responseJson) => {
