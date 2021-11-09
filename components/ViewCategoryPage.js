@@ -2,7 +2,7 @@ import React from 'react';
 import { View, FlatList, ActivityIndicator, Text, TextInput, Image } from 'react-native';
 
 import styles from '../styles/Styles';
-import baseUrl from '../constants/api';
+import { baseUrl, entriesConfig } from '../constants/constants';
 import { imageHeight, imageWidth } from '../helper/Dimension';
 
 class ViewCategoryPage extends React.Component {
@@ -10,14 +10,15 @@ class ViewCategoryPage extends React.Component {
         super(props);
 
         this.state = {
-            data: [],
-            loading: true,
-            refreshing: false,
-            loadMore: false,
             page: 0,
-            pageSize: 10,
+            data: [],
+            slug: '',
             keyword: '',
             imageSrc: "",
+            loading: true,
+            pageSize: 100,
+            loadMore: false,
+            refreshing: false,
             shouldRefresh: false
         };
     }
@@ -28,6 +29,7 @@ class ViewCategoryPage extends React.Component {
 
     componentDidMount() {
         this.setState({
+            slug: this.props.navigation.state.params.slug,
             imageSrc: this.props.navigation.state.params.imageSrc
         });
 
@@ -35,17 +37,20 @@ class ViewCategoryPage extends React.Component {
     }
 
     LoadEntires = () => {
+        console.log(this.props.navigation.state.params)
+
         let tempPage = this.state.page + 1;
         let url = baseUrl + '/entry/?page=' + tempPage.toString() + '&per_page=' + this.state.pageSize.toString();
         return fetch(url)
             .then((response) => response.json())
             .then((responseJson) => {
-                if (responseJson.length > 0) {
+                const filtered = responseJson.filter((item) => entriesConfig[this.state.slug].includes(item.fn.rendered))
+                if (filtered.length > 0) {
                     this.setState({
                         loading: false,
                         loadMore: false,
                         refreshing: false,
-                        data: (this.state.page === 0) ? responseJson : [...this.state.data, ...responseJson],
+                        data: (this.state.page === 0) ? filtered : [...this.state.data, ...filtered],
                         page: this.state.page + 1
                     });
                 } else {

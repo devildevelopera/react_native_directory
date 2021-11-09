@@ -1,1 +1,0 @@
-export default baseUrl = 'https://aliveandthrivewyco.org//wp-json/cn-api/v1';

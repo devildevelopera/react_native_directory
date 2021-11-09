@@ -8,7 +8,7 @@ import { View, Text, TextInput, Alert, TouchableOpacity, ActivityIndicator, Scro
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import styles from '../styles/Styles';
-import baseUrl from '../constants/api';
+import { baseUrl } from '../constants/constants';
 
 class AddEntryPage extends Component {
     constructor(props) {
@@ -527,7 +527,7 @@ Notes: ${this.state.notes}
                     }
                     value={this.state.notes != 0 ? this.state.notes.toString() : ''} />
 
-                { this.renderError()}
+                {this.renderError()}
 
                 <TouchableOpacity
                     activeOpacity={.4}

@@ -4,7 +4,7 @@ import MapView, { Marker } from 'react-native-maps';
 import { View, Text, ActivityIndicator, Image, ScrollView } from 'react-native';
 
 import styles from '../styles/Styles';
-import baseUrl from '../constants/api';
+import { baseUrl } from '../constants/constants';
 import { imageHeight, imageWidth } from '../helper/Dimension';
 
 class ViewEntryPage extends Component {

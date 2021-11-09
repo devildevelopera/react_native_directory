@@ -2,30 +2,8 @@ import React from 'react';
 import { View, FlatList, ActivityIndicator, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styles/Styles';
-import baseUrl from '../constants/api';
+import { baseUrl, Images } from '../constants/constants';
 import { imageHeight, imageWidth } from '../helper/Dimension';
-
-export const Images = {
-    'adult-education': require('../assets/adult-education.jpg'),
-    'childcare': require('../assets/childcare.jpg'),
-    'childrens-education': require('../assets/childrens-education.jpg'),
-    'community-involvement-social-support': require('../assets/community-involvement-social-support-new.jpg'),
-    'community-reentry-assistance': require('../assets/community-reentry-assistance.jpg'),
-    'employment': require('../assets/employment-new.jpg'),
-    'family-relations': require('../assets/family-relations-new.jpg'),
-    'food': require('../assets/food.jpg'),
-    'healthcare-coverage': require('../assets/healthcare-coverage-new.jpg'),
-    'housing': require('../assets/housing-new.jpg'),
-    'income': require('../assets/income.jpg'),
-    'legal': require('../assets/legal.jpg'),
-    'lifeskills': require('../assets/lifeskills.jpg'),
-    'mental-health': require('../assets/mental-health.jpg'),
-    'mobility': require('../assets/mobility.jpg'),
-    'other': require('../assets/other.jpg'),
-    'parenting-skills': require('../assets/parenting-skills.jpg'),
-    'safety': require('../assets/safety.jpg'),
-    'uncategorized': require('../assets/uncategorized.jpg'),
-}
 
 class CategoryPage extends React.Component {
     constructor(props) {
@@ -121,7 +99,8 @@ class CategoryPage extends React.Component {
     GetViewCategory = (categoryId, slug) => {
         this.props.navigation.navigate('ViewCategory', {
             categoryId: categoryId,
-            imageSrc: Images[`${slug}`]
+            imageSrc: Images[`${slug}`],
+            slug: slug
         });
     }
 
