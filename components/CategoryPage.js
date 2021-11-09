@@ -2,7 +2,7 @@ import React from 'react';
 import { View, FlatList, ActivityIndicator, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styles/Styles';
-import { baseUrl, Images } from '../constants/constants';
+import { baseUrl, Images, entriesConfig } from '../constants/constants';
 import { imageHeight, imageWidth } from '../helper/Dimension';
 
 class CategoryPage extends React.Component {
@@ -17,7 +17,8 @@ class CategoryPage extends React.Component {
             page: 0,
             pageSize: 10,
             keyword: '',
-            shouldRefresh: false
+            shouldRefresh: false,
+            entries: []
         };
     }
 
@@ -28,6 +29,7 @@ class CategoryPage extends React.Component {
 
     componentDidMount() {
         this.LoadCategories();
+        this.LoadEntires();
     }
 
     LoadCategories = () => {
@@ -52,6 +54,23 @@ class CategoryPage extends React.Component {
                         loading: false,
                         loadMore: false,
                         refreshing: false
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+    }
+
+    LoadEntires = () => {
+        let url = baseUrl + '/entry/?page=1&per_page=100';
+        return fetch(url)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                if (responseJson.length > 0) {
+                    this.setState({
+                        entries: responseJson,
                     });
                 }
             })
@@ -97,10 +116,11 @@ class CategoryPage extends React.Component {
     }
 
     GetViewCategory = (categoryId, slug) => {
+        const filtered = this.state.entries.filter((item) => entriesConfig[slug].includes(item.fn.rendered))
         this.props.navigation.navigate('ViewCategory', {
             categoryId: categoryId,
             imageSrc: Images[`${slug}`],
-            slug: slug
+            filtered: filtered
         });
     }
 
@@ -139,44 +159,49 @@ class CategoryPage extends React.Component {
                     style={styles.SearchBox}
                 />
                 {this.renderSeparator()}
-                <FlatList
-                    data={this.state.data}
-                    renderItem={({ item }) => (
-                        <TouchableOpacity
-                            onPress={this.GetViewCategory.bind(
-                                this,
-                                item.id,
-                                item.slug
-                            )}
-                        >
-                            <Image
-                                source={Images[`${item.slug}`]}
-                                style={{ height: imageHeight, width: imageWidth }}
-                            />
-                            <Text
-                                style={styles.RowContainer}
-
+                {this.state.entries.length === 0 ?
+                    <View style={{ flex: 1, paddingTop: 20 }}>
+                        <ActivityIndicator size="large" color="#2196f3" />
+                    </View> :
+                    <FlatList
+                        data={this.state.data}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity
+                                onPress={this.GetViewCategory.bind(
+                                    this,
+                                    item.id,
+                                    item.slug
+                                )}
                             >
-                                {item.name.replace("&#039;", "'")} ({item.count})
-                            </Text>
-                        </TouchableOpacity>
-                    )}
-                    keyExtractor={item => item.id.toString()}
-                    ItemSeparatorComponent={this.renderSeparator}
-                    onRefresh={this.Refresh}
-                    refreshing={this.state.refreshing}
-                    onEndReached={() => this.LoadMore()}
-                    ListHeaderComponent={this.renderHeader}
-                    ListFooterComponent={() => {
-                        if (this.state.loadMore) {
-                            return <View style={{ flex: 1, paddingTop: 20 }}>
-                                <ActivityIndicator size="large" color="#2196f3" />
-                            </View>
-                        }
-                        return null;
-                    }}
-                    onEndReachedThreshold='0.3'
-                />
+                                <Image
+                                    source={Images[`${item.slug}`]}
+                                    style={{ height: imageHeight, width: imageWidth }}
+                                />
+                                <Text
+                                    style={styles.RowContainer}
+
+                                >
+                                    {item.name.replace("&#039;", "'")} ({item.count})
+                                </Text>
+                            </TouchableOpacity>
+                        )}
+                        keyExtractor={item => item.id.toString()}
+                        ItemSeparatorComponent={this.renderSeparator}
+                    // onRefresh={this.Refresh}
+                    // refreshing={this.state.refreshing}
+                    // onEndReached={() => this.LoadMore()}
+                    // ListHeaderComponent={this.renderHeader}
+                    // ListFooterComponent={() => {
+                    //     if (this.state.loadMore) {
+                    //         return <View style={{ flex: 1, paddingTop: 20 }}>
+                    //             <ActivityIndicator size="large" color="#2196f3" />
+                    //         </View>
+                    //     }
+                    //     return null;
+                    // }}
+                    // onEndReachedThreshold='0.3'
+                    />
+                }
             </View>
         );
     }
